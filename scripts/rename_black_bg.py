@@ -19,7 +19,7 @@ import re
 import shutil
 from pathlib import Path
 
-GEN_ROOT = Path(__file__).resolve().parent
+GEN_ROOT = Path(__file__).resolve().parent.parent  # project root (script lives in scripts/)
 MAP_PATH = GEN_ROOT / "final_windows_map.json"
 
 SRC_DIR = Path("/Users/benstrauss/TransientLabs/NFT-Projects/windows/final_windows_black_bg")

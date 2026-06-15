@@ -2,7 +2,7 @@
 # requires-python = ">=3.14"
 # dependencies = ["pillow"]
 # ///
-"""Convert every PNG in final_windows/ to WebP in final_windows_webp/.
+"""Convert every PNG in the input dir to WebP, written to the output dir.
 
 Run with:  uv run convert_webp.py
 (uv reads the inline dependency block above and installs Pillow automatically.)
@@ -12,10 +12,8 @@ from pathlib import Path
 
 from PIL import Image
 
-# Paths resolve relative to this file, so the script works from any CWD.
-ROOT = Path(__file__).resolve().parent
-INPUT_DIR = ROOT / "final_windows"
-OUTPUT_DIR = ROOT / "final_windows_webp"
+INPUT_DIR = Path("/Users/benstrauss/Downloads/new-window")
+OUTPUT_DIR = Path("/Users/benstrauss/Downloads/new-window")
 
 # --- WebP encode settings (tweak as needed) ---
 QUALITY = 100        # 0-100, lossy quality; higher = better and larger

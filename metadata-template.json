@@ -1,0 +1,49 @@
+{
+    "name": "WINDOW N", 
+    "description": "string from notable", 
+    "attributes": [
+        {
+            "trait_type": "Circadian",
+            "value": "string"
+        },
+{
+            "trait_type": "Color",
+            "value": "string"
+        },
+        {
+            "trait_type": "Frame",
+            "value": "string"
+        },
+        {
+            "trait_type": "Occupant",
+            "value": "string"
+        },
+        {
+            "trait_type": "Treatment",
+            "value": "string of treatment 1"
+        },
+        {
+            "trait_type": "Treatment",
+            "value": "string of treatment 2"
+        },
+        {
+            "trait_type": "Object",
+            "value": "string of object 1"
+        },
+        {
+            "trait_type": "Object",
+            "value": "string of object 2"
+        },
+        {
+            "trait_type": "Special",
+            "value": "Yes or No"
+        }
+    ],
+    "image": "ipfs://<cid>",
+    "image_sha256": "string",
+    "media": {
+        "dimensions": "<number>x<number>",
+        "size": "<number>",
+        "mimeType": "image/jpg"
+    }
+}

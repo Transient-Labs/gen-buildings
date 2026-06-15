@@ -21,7 +21,7 @@ import random
 import re
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent  # project root (script lives in scripts/)
 NAME_RE = re.compile(r"^window-(\d+)\.(\w+)$")
 
 
