@@ -75,6 +75,8 @@
         }
 
         const GRID = weightedPick(GRID_SIZES).n;
+        // LAYOUT trait: a building-style name per grid size.
+        const LAYOUTS = { 3: "BROWNSTONE", 4: "WALK UP", 6: "PRE WAR", 8: "TOWER", 12: "HIGH RISE" };
 
         // Edge-to-edge tiling: cell == source window. Full native res for the
         // snapshot; downscaled for live playback only when the grid is large.
@@ -334,18 +336,18 @@
                 function finish() {
                     // Mint pipeline: traits + snapshot, AFTER the final frame is drawn.
                     $art.setTraits({
-                        "Grid Size": GRID + "x" + GRID,
-                        "Special Building": specialName,
-                        "Primary Color": primaryColor,
-                        "Circadian Cycle": circadianCycle,
+                        "LAYOUT": LAYOUTS[GRID],
+                        "ARCHETYPE": specialName.toUpperCase(),
+                        "COLORWAY": primaryColor.toUpperCase(),
+                        "CIRCADIAN CYCLE": circadianCycle.toUpperCase(),
                     });
                     $art.snapshot(); // last: signals Cloudflare the render is complete
                 }
 
-                console.log("Grid Size:", GRID + "x" + GRID);
-                console.log("Special Buidling:", specialName);
-                console.log("Primary Color:", primaryColor);
-                console.log("Circadian Cycle:", circadianCycle);
+                console.log("LAYOUT:", LAYOUTS[GRID]);
+                console.log("ARCHETYPE:", specialName.toUpperCase());
+                console.log("COLORWAY:", primaryColor.toUpperCase());
+                console.log("CIRCADIAN CYCLE:", circadianCycle.toUpperCase());
 
 
                 if ($art.captureMode) {
