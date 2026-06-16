@@ -15,7 +15,6 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            /* Stop long-press from selecting the canvas/iframe on mobile */
             -webkit-user-select: none;
             user-select: none;
             -webkit-touch-callout: none;
@@ -32,29 +31,18 @@
             -webkit-tap-highlight-color: transparent;
         }
     </style>
-    <!-- Self-contained: no art.js, no randomness — a single hardcoded layout. -->
 </head>
 
 <body>
     <script>
-        const WINDOW_COUNT = 1000; // reg_windows/window-1.png ... window-1000.png
+        const WINDOW_COUNT = 1000;
 
-        // Fixed neighborhood grid: 20 columns x 12 rows (no grid-size variability).
-        // Windows are native 4:5 tiles (600x750) tiled edge-to-edge, so the canvas
-        // is COLS*600 x ROWS*750 = 12000x9000 (4:3). (The 20:12 grid ratio is 5:3,
-        // but the pixel aspect is 4:3 because each window is itself 4:5.)
         const COLS = 20;
         const ROWS = 12;
-        const CELL_W = 200; // native window width
-        const CELL_H = 250; // native window height
-        // Snapshot renders at full native resolution; the live canvas caps its
-        // height (display is scaled to fit anyway), keeping a giant 9000px-tall
-        // live buffer from choking the browser.
+        const CELL_W = 200;
+        const CELL_H = 250;
         const LIVE_MAX_H = 4000;
 
-        // Edge-to-edge tiling: cell == source window. A mouse means the user can
-        // right-click "Save Image As", so render the live buffer at full native
-        // resolution there; pure-touch devices keep the perf cap.
         const hasMouse = !!(window.matchMedia && window.matchMedia("(any-pointer: fine)").matches);
         const liveScale = hasMouse ? 1 : Math.min(1, LIVE_MAX_H / (ROWS * CELL_H));
         const cellW = Math.round(CELL_W * liveScale);
@@ -69,8 +57,6 @@
         document.body.appendChild(canvas);
         const ctx = canvas.getContext("2d");
 
-        // IPFS gateways tried in order; the round robin falls through to the
-        // next one whenever a gateway fails to serve a window image.
         const IPFS_GATEWAYS = [
             "https://ipfs.io",
             "https://dweb.link",
@@ -78,7 +64,6 @@
             "https://ipfs.transientusercontent.xyz",
         ];
 
-        // Load one URL into a fully-decoded ImageBitmap.
         function loadFrom(src) {
             return new Promise((resolve, reject) => {
                 const img = new Image();
@@ -86,9 +71,6 @@
                 img.onerror = () => reject(new Error("failed to load " + src));
                 img.src = src;
             }).then((img) =>
-                // Fully decode now and keep the decoded pixels as an
-                // ImageBitmap; otherwise the browser decodes lazily and the
-                // first zoom-in stalls ~100ms re-rasterizing at full size.
                 img
                     .decode()
                     .then(() => (window.createImageBitmap ? createImageBitmap(img) : img))
@@ -96,10 +78,8 @@
             );
         }
 
-        // Round-robin the gateways: try ipfs.io first, then fall back through
-        // the rest, resolving with the first gateway that serves the image.
         function loadImage(src) {
-            const path = src.slice(src.indexOf("/ipfs/")); // "/ipfs/CID/window-N.webp"
+            const path = src.slice(src.indexOf("/ipfs/"));
             let attempt = 0;
             const tryNext = () =>
                 loadFrom(IPFS_GATEWAYS[attempt] + path).catch((err) => {
@@ -109,35 +89,26 @@
             return tryNext();
         }
 
-        // ---- reveal animation (frame-counter driven, not wall-clock) ----
         const FPS = 60;
-        const TOTAL_FRAMES = 2 * FPS; // whole reveal ~2s
-        const POP_FRAMES = 36; // each window's pop ~0.6s
+        const TOTAL_FRAMES = 2 * FPS;
+        const POP_FRAMES = 36;
 
-        // Underdamped pop: starts fast, overshoots ~1.1, rebounds to 1.
         function easeOutBack(t) {
             const c1 = 1.70158;
             const c3 = c1 + 1;
             return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
         }
 
-        // Hardcoded layout: array index = cell, left-to-right wrapping to the next
-        // row (cell i = row*COLS + col). No randomness, no $art.
         const picks = [885, 91, 278, 206, 871, 493, 978, 956, 427, 855, 831, 6, 400, 796, 535, 897, 362, 100, 281, 534, 522, 423, 706, 59, 884, 99, 248, 387, 850, 553, 461, 634, 478, 45, 256, 43, 86, 709, 272, 891, 475, 509, 912, 745, 381, 743, 92, 964, 371, 70, 94, 833, 768, 283, 252, 72, 714, 292, 312, 718, 987, 562, 837, 181, 318, 530, 662, 418, 447, 470, 570, 587, 799, 260, 152, 119, 930, 704, 748, 57, 286, 453, 329, 970, 61, 645, 615, 967, 760, 34, 593, 60, 730, 198, 590, 305, 960, 384, 258, 372, 806, 746, 317, 279, 448, 487, 983, 700, 32, 824, 984, 526, 644, 951, 201, 764, 495, 577, 995, 28, 103, 158, 763, 882, 592, 237, 717, 125, 608, 946, 750, 532, 928, 571, 756, 47, 24, 773, 798, 11, 875, 365, 894, 144, 852, 767, 262, 632, 873, 202, 251, 114, 918, 390, 776, 686, 915, 22, 546, 357, 521, 835, 966, 847, 958, 774, 610, 229, 287, 507, 241, 675, 826, 289, 440, 78, 973, 858, 945, 864, 364, 133, 446, 606, 108, 236, 611, 2, 192, 482, 876, 424, 322, 307, 436, 269, 166, 141, 678, 85, 738, 37, 169, 892, 968, 50, 432, 845, 63, 985, 239, 19, 132, 205, 921, 531, 275, 267, 766, 130, 836, 339, 823, 264, 974, 877, 38, 907, 672, 127, 808, 44, 671, 333, 576, 220, 113, 694, 30, 394];
         const cells = COLS * ROWS;
 
-        // Deterministic per-cell value in [0,1): a pure hash of the cell index, so
-        // the reveal order and sway are identical every load (replaces the $art RNG).
         function det(i, k) {
             const x = Math.sin((i + 1) * 127.1 + (k + 1) * 311.7) * 43758.5453;
             return x - Math.floor(x);
         }
 
-        // Reveal order: deterministic scatter (stable hash of cell index).
         const revealOrder = picks.map((_, i) => i).sort((a, b) => det(a, 99) - det(b, 99));
 
-        // Per-window sway + swell parameters, deterministic from cell index
-        // (same ranges the random version used).
         const floats = picks.map((_, i) => ({
             ax: 0.01 + 0.012 * det(i, 0),
             ay: 0.014 + 0.016 * det(i, 1),
@@ -153,8 +124,6 @@
             Promise.all(picks.map((n) => loadImage(`https://ipfs.io/ipfs/Qmb195Z9XLptpKy3oyUxeLupCQE9eDUrXkiz8xQuSK1GwV/window-${n}.webp`))).then((images) => {
                 const count = COLS * ROWS;
 
-                // Stagger pop starts across the reveal window so the last pop
-                // finishes at TOTAL_FRAMES, regardless of grid size.
                 const span = TOTAL_FRAMES - POP_FRAMES;
                 const startFrame = new Array(count);
                 revealOrder.forEach((cell, order) => {
@@ -169,10 +138,8 @@
                         for (let gx = 0; gx < COLS; gx++) {
                             const i = gy * COLS + gx;
                             const t = (frame - startFrame[i]) / POP_FRAMES;
-                            if (t < 0) continue; // not revealed yet
+                            if (t < 0) continue;
 
-                            // easeOutBack(0) === 0, so windows scale continuously from/to
-                            // nothing rather than appearing at a fixed minimum size.
                             const scale = t >= 1 ? 1 : easeOutBack(t);
                             if (scale <= 0) continue;
 
@@ -191,8 +158,6 @@
                     }
                 }
 
-                // All windows at rest, gently swaying. `f` drives the sine phases,
-                // `k` scales the sway amplitude (0 = static grid, 1 = full sway).
                 function renderFloat(f, k) {
                     ctx.fillStyle = "#000";
                     ctx.fillRect(0, 0, W, H);
@@ -205,7 +170,6 @@
                             const y = gy * cellH;
                             const offX = fl.ax * cellW * Math.sin(f * fl.sx + fl.px) * k;
                             const offY = fl.ay * cellH * Math.sin(f * fl.sy + fl.py) * k;
-                            // swell scales around the cell center so breathing doesn't drift
                             const swell = 1 + fl.as * Math.sin(f * fl.ss + fl.ps) * k;
                             const w = cellW * swell;
                             const h = cellH * swell;
@@ -220,15 +184,13 @@
                     }
                 }
 
-                // Scale of cell i at boomerang frame rf (same math as render()).
                 function scaleAtFrame(rf, i) {
                     const t = (rf - startFrame[i]) / POP_FRAMES;
                     if (t < 0) return 0;
                     return t >= 1 ? 1 : easeOutBack(t);
                 }
 
-                // Snap: every window pops from its captured scale to 1 at once.
-                const SNAP_FRAMES = 24; // ~0.4s
+                const SNAP_FRAMES = 24;
                 let snapScales = null;
                 function renderSnap(t) {
                     ctx.fillStyle = "#000";
@@ -255,28 +217,20 @@
                     }
                 }
 
-                // State machine. Click cycle once settled:
-                //   settled -> boomerang (out/pause/in/hold forever)
-                //   boomerang -> snap (everything pops to full immediately) -> alive
-                //   alive -> calm (sway eases out) -> settled
-                // Long press on a window (from settled or alive) zooms the camera
-                // in on it until it fills the canvas; click zooms back out.
-                let state = "reveal"; // reveal | settled | out | pause | in | hold | snap | alive | calm | zoomin | zoomed | zoomout
+                let state = "reveal";
                 let frame = 0;
                 let floatFrame = 0;
                 let calmStartK = 1;
-                const PAUSE_FRAMES = 30; // ~500ms hold at empty and at full grid
-                const RAMP_FRAMES = 60; // sway ease-in / ease-out ~1s
+                const PAUSE_FRAMES = 30;
+                const RAMP_FRAMES = 60;
 
-                // ---- long-press camera zoom ----
-                const ZOOM_FRAMES = 72; // ~1.2s in/out
-                let baseState = "settled"; // what the camera is looking at (settled | alive)
+                const ZOOM_FRAMES = 72;
+                let baseState = "settled";
 
                 function easeInOutCubic(t) {
                     return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
                 }
 
-                // Draw whatever the world looks like underneath the camera.
                 function renderBase() {
                     if (baseState === "alive") {
                         renderFloat(floatFrame, Math.min(floatFrame / RAMP_FRAMES, 1));
@@ -286,21 +240,15 @@
                     }
                 }
 
-                // Camera = center point + view width in canvas coords (view height
-                // follows from the 4:5 aspect). The zoomed window renders at
-                // ZOOM_LEVEL of the canvas size regardless of grid size, and
-                // while zoomed the camera can pan to explore the grid.
                 const ZOOM_LEVEL = 0.5;
-                const GRID_VIEW = { x: W / 2, y: H / 2, vw: W }; // camera showing the full grid
-                let cam = { ...GRID_VIEW }; // current camera
-                let zoomTarget = null; // camera aimed at the pressed cell
-                let zoomFrom = null; // camera snapshot when a zoom leg starts
+                const GRID_VIEW = { x: W / 2, y: H / 2, vw: W };
+                let cam = { ...GRID_VIEW };
+                let zoomTarget = null;
+                let zoomFrom = null;
 
-                // Pan inertia: the camera carries momentum after a flick and decays
-                // with friction, so the grid feels like it has a little mass.
-                let vel = { x: 0, y: 0 }; // canvas units / frame
-                const FRICTION = 0.9; // velocity retained each frame while gliding
-                const MIN_VEL = 0.2; // below this the glide stops
+                let vel = { x: 0, y: 0 };
+                const FRICTION = 0.9;
+                const MIN_VEL = 0.2;
 
                 function renderView(c) {
                     const s = W / c.vw;
@@ -309,8 +257,6 @@
                     ctx.setTransform(1, 0, 0, 1, 0, 0);
                 }
 
-                // Ease the camera between two views; keeps `cam` current so a
-                // pan or reverse zoom can take over from wherever it is.
                 function renderZoomLeg(from, to, u) {
                     const e = easeInOutCubic(u);
                     cam = {
@@ -321,7 +267,6 @@
                     renderView(cam);
                 }
 
-                // Keep the view inside the canvas while panning.
                 function clampAxis(v, half, max) {
                     if (half * 2 >= max) return max / 2;
                     return Math.min(Math.max(v, half), max - half);
@@ -337,8 +282,8 @@
                         render(frame);
                         if (frame >= TOTAL_FRAMES) {
                             state = "settled";
-                            running = false; // stop the loop; a click restarts it
-                            return; // idle until clicked
+                            running = false;
+                            return;
                         }
                         frame++;
                     } else if (state === "out") {
@@ -350,7 +295,7 @@
                             frame++;
                         }
                     } else if (state === "pause") {
-                        render(-1); // hold a fully empty canvas before popping back in
+                        render(-1);
                         if (frame >= PAUSE_FRAMES) {
                             state = "in";
                             frame = 0;
@@ -366,7 +311,6 @@
                             frame++;
                         }
                     } else if (state === "hold") {
-                        // hold the full grid before reversing out again
                         render(TOTAL_FRAMES);
                         if (frame >= PAUSE_FRAMES) {
                             state = "out";
@@ -383,11 +327,10 @@
                             frame++;
                         }
                     } else if (state === "alive") {
-                        const k = Math.min(floatFrame / RAMP_FRAMES, 1); // sway eases in
+                        const k = Math.min(floatFrame / RAMP_FRAMES, 1);
                         renderFloat(floatFrame, k);
                         floatFrame++;
                     } else if (state === "calm") {
-                        // sway eases out, windows drift back to rest, then go static
                         const k = calmStartK * Math.max(1 - frame / RAMP_FRAMES, 0);
                         renderFloat(floatFrame, k);
                         floatFrame++;
@@ -395,7 +338,7 @@
                             render(TOTAL_FRAMES);
                             state = "settled";
                             running = false;
-                            return; // idle until clicked
+                            return;
                         }
                         frame++;
                     } else if (state === "zoomin") {
@@ -406,14 +349,13 @@
                             frame++;
                         }
                     } else if (state === "zoomed") {
-                        // While not actively dragging, glide on leftover momentum.
                         if (!drag && (Math.abs(vel.x) > MIN_VEL || Math.abs(vel.y) > MIN_VEL)) {
                             const wantX = cam.x + vel.x;
                             const wantY = cam.y + vel.y;
                             cam.x = wantX;
                             cam.y = wantY;
                             clampCam();
-                            if (cam.x !== wantX) vel.x = 0; // hit an edge: kill that axis
+                            if (cam.x !== wantX) vel.x = 0;
                             if (cam.y !== wantY) vel.y = 0;
                             vel.x *= FRICTION;
                             vel.y *= FRICTION;
@@ -421,7 +363,7 @@
                             vel.x = 0;
                             vel.y = 0;
                         }
-                        renderView(cam); // pan moves cam; sway continues if alive
+                        renderView(cam);
                     } else if (state === "zoomout") {
                         renderZoomLeg(zoomFrom, GRID_VIEW, frame / ZOOM_FRAMES);
                         if (frame >= ZOOM_FRAMES) {
@@ -429,7 +371,7 @@
                             if (state === "settled") {
                                 render(TOTAL_FRAMES);
                                 running = false;
-                                return; // idle until clicked
+                                return;
                             }
                         } else {
                             frame++;
@@ -437,44 +379,33 @@
                     }
                 }
 
-                // ---- frame-rate cap (same technique as p5.js frameRate) ----
-                // requestAnimationFrame fires at the monitor's native rate — 60Hz, or
-                // 120Hz on a ProMotion display in Brave/Chrome. We let it fire freely
-                // but only advance the animation once per targetInterval, so playback
-                // is locked to FPS regardless of refresh rate. FRAME_EPSILON mirrors
-                // p5's leniency: a frame that lands a hair early still counts, which
-                // keeps the cadence even when capping 60 on a 120Hz panel.
                 const targetInterval = 1000 / FPS;
                 const FRAME_EPSILON = 5;
                 let running = false;
                 let lastTargetFrameTime = 0;
 
                 function loop(now) {
-                    if (!running) return; // a tick asked to idle: stop scheduling
+                    if (!running) return;
                     requestAnimationFrame(loop);
                     if (now - lastTargetFrameTime >= targetInterval - FRAME_EPSILON) {
-                        // Advance the target clock; Math.max prevents a backlog of
-                        // catch-up frames if rAF stalled (e.g. backgrounded tab).
                         lastTargetFrameTime = Math.max(lastTargetFrameTime + targetInterval, now);
                         tick();
                     }
                 }
                 function startLoop() {
-                    if (running) return; // never stack two loops
+                    if (running) return;
                     running = true;
-                    lastTargetFrameTime = 0; // draw the first frame immediately
+                    lastTargetFrameTime = 0;
                     requestAnimationFrame(loop);
                 }
                 startLoop();
 
-                // ---- long-press detection (pointer events: mouse + touch) ----
                 const LONG_PRESS_MS = 500;
-                const MOVE_TOLERANCE = 10; // css px of drift before the press cancels
+                const MOVE_TOLERANCE = 10;
                 let pressTimer = null;
                 let longPressFired = false;
                 let pressPos = null;
 
-                // Map a pointer event to the cell under it (null in gutters/margins).
                 function cellAt(clientX, clientY) {
                     const rect = canvas.getBoundingClientRect();
                     const px = (clientX - rect.left) * (W / rect.width);
@@ -482,7 +413,6 @@
                     const gx = Math.floor(px / cellW);
                     const gy = Math.floor(py / cellH);
                     if (gx < 0 || gx >= COLS || gy < 0 || gy >= ROWS) return null;
-                    // Zero gutter: every in-bounds pixel belongs to a cell.
                     return { x: gx * cellW, y: gy * cellH };
                 }
 
@@ -491,16 +421,14 @@
                     pressPos = null;
                 }
 
-                // Drag-to-pan while zoomed.
-                let drag = null; // { x, y, camX, camY, moved }
-                let suppressClick = false; // a real drag shouldn't exit the zoom
-                let lastMoveT = 0; // timestamp of the last pan move, for release momentum
-                let lastPointerType = "mouse"; // gates the context menu: mouse vs touch
+                let drag = null;
+                let suppressClick = false;
+                let lastMoveT = 0;
+                let lastPointerType = "mouse";
 
                 function endDrag() {
                     if (drag) {
                         if (drag.moved) suppressClick = true;
-                        // If the finger was held still before lifting, don't fling.
                         if (performance.now() - lastMoveT > 80) {
                             vel.x = 0;
                             vel.y = 0;
@@ -510,17 +438,11 @@
                 }
 
                 canvas.addEventListener("pointerdown", (e) => {
-                    // A long press on touch often fires no synthetic click on release,
-                    // leaving longPressFired stuck true so the next tap gets eaten.
-                    // Clear it on the next interaction so one tap exits the zoom.
                     longPressFired = false;
                     lastPointerType = e.pointerType || "mouse";
-                    // Only the primary (left) button drives zoom/pan; let right- and
-                    // middle-clicks through so the native menu (Save Image As) works
-                    // without triggering a long-press zoom. (Touch reports button 0.)
                     if (e.button !== 0) return;
                     if (state === "zoomed") {
-                        vel.x = 0; // catch the camera mid-glide
+                        vel.x = 0;
                         vel.y = 0;
                         drag = { x: e.clientX, y: e.clientY, camX: cam.x, camY: cam.y, moved: false };
                         lastMoveT = performance.now();
@@ -536,10 +458,6 @@
                         longPressFired = true;
                         baseState = state;
                         zoomFrom = { ...GRID_VIEW };
-                        // Aim at the pressed cell, but clamp to the same bounds
-                        // panning uses, so edge/corner windows zoom in off-center
-                        // (within the canvas) instead of overshooting the edge and
-                        // snapping into place on the first drag.
                         const tvw = cellW / ZOOM_LEVEL;
                         const tvh = tvw * (H / W);
                         zoomTarget = {
@@ -549,10 +467,9 @@
                         };
                         state = "zoomin";
                         frame = 0;
-                        vel.x = 0; // start the zoom with no leftover momentum
+                        vel.x = 0;
                         vel.y = 0;
-                        // settled idles with the loop stopped; alive already has it running
-                        startLoop(); // no-op if already running
+                        startLoop();
                     }, LONG_PRESS_MS);
                 });
                 canvas.addEventListener("pointermove", (e) => {
@@ -567,8 +484,6 @@
                         cam.x = drag.camX - dx * worldPerPx;
                         cam.y = drag.camY - dy * worldPerPx;
                         clampCam();
-                        // Track velocity for release momentum: weight the latest move
-                        // heavily, but smooth a little so jitter doesn't fling.
                         vel.x = (cam.x - prevX) * 0.6 + vel.x * 0.4;
                         vel.y = (cam.y - prevY) * 0.6 + vel.y * 0.4;
                         lastMoveT = performance.now();
@@ -588,15 +503,11 @@
                     endDrag();
                 });
                 canvas.addEventListener("pointerleave", cancelPress);
-                // Desktop: allow the native right-click menu so "Save Image As" works
-                // on the canvas. Touch: keep suppressing it so a long press doesn't
-                // pop the browser's default menu/selection.
                 canvas.addEventListener("contextmenu", (e) => {
                     if (lastPointerType === "touch") e.preventDefault();
                 });
                 canvas.style.touchAction = "none";
 
-                // Scroll/trackpad pans the zoomed view too.
                 canvas.addEventListener(
                     "wheel",
                     (e) => {
@@ -613,17 +524,14 @@
 
                 canvas.addEventListener("click", () => {
                     if (suppressClick) {
-                        // release at the end of a pan; don't exit the zoom
                         suppressClick = false;
                         return;
                     }
                     if (longPressFired) {
-                        // the release after a long press also fires click; eat it
                         longPressFired = false;
                         return;
                     }
                     if (state === "zoomed" || state === "zoomin") {
-                        // zoom back out from wherever the camera is
                         zoomFrom = { ...cam };
                         state = "zoomout";
                         frame = 0;
@@ -634,13 +542,11 @@
                         frame = 0;
                         startLoop();
                     } else if (state === "out" || state === "pause" || state === "in" || state === "hold") {
-                        // boomerang -> capture where every window is right now and pop
-                        // it all back to full view immediately
                         const rf =
                             state === "out" ? TOTAL_FRAMES - frame :
                                 state === "pause" ? -1 :
                                     state === "in" ? frame :
-                                        TOTAL_FRAMES; // hold
+                                        TOTAL_FRAMES;
                         snapScales = picks.map((_, i) => scaleAtFrame(rf, i));
                         state = "snap";
                         frame = 0;
@@ -649,7 +555,6 @@
                         state = "calm";
                         frame = 0;
                     }
-                    // reveal/calm: ignore clicks while transitioning
                 });
             });
     </script>
