@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parent.parent  # project root (script lives in s
 OUT_PATH = ROOT / "neighborhood_picks.json"
 
 LOW, HIGH = 1, 1000  # inclusive on both ends
-COUNT = 240          # numbers per set
+COUNT = 320          # numbers per set
 SETS = 20            # number of sets
 UNIQUE = True        # True = no repeats within a set; False = independent draws
 SEED = None          # int for a reproducible result; None = OS randomness
