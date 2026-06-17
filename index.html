@@ -239,6 +239,13 @@
                 }
             }
 
+            // Surface the chosen window ids for external reads. Plain
+            // assignment + postMessage — no $art draws, so determinism is
+            // unaffected. window.picks works same-origin; postMessage crosses
+            // the iframe boundary for a parent page on another origin.
+            window.picks = picks;
+            window.parent.postMessage({ type: "picks", tokenId: $art.mint.tokenId, picks }, "*");
+
             // Reveal order: Fisher-Yates shuffle of cell indices.
             const revealOrder = picks.map((_, i) => i);
             for (let i = revealOrder.length - 1; i > 0; i--) {
