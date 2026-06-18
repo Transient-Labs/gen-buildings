@@ -297,6 +297,61 @@ const metadata = {
 
 ---
 
+## Exporting collection data
+
+Two scripts in [`scripts/`](./scripts) export the whole collection's traits to JSON. They run in sequence — the first pulls the token list off the API, the second renders each token locally and reads its traits. Both use [`uv`](https://docs.astral.sh/uv/) and declare their own dependencies inline (PEP 723), so there's nothing to `pip install`.
+
+### Step 1 — `fetch_buildings_urls.py` → `buildings_urls.json`
+
+Pages through the Transient catalog API for the BUILDINGS contract and writes each token's `name` and `animation_url` (the `ipfs://…/index.html?…` mint URL, query params and all).
+
+```
+uv run scripts/fetch_buildings_urls.py
+```
+
+```jsonc
+// buildings_urls.json
+{
+  "buildings": [
+    { "tokenId": 1, "name": "BUILDING 1", "animation_url": "ipfs://Qm…/index.html?tokenId=1&blockhash=0x…" }
+    // …one per token, in tokenId order
+  ]
+}
+```
+
+### Step 2 — `build_buildings_data.py` → `buildings_data.json`
+
+Reads `buildings_urls.json`, takes the query params off each `animation_url`, and loads the **local** `index.html` with them in headless Chromium — under a `tl-gen-art` user agent, so `$art.captureMode` is on and the page jumps straight to `finish()` → `$art.setTraits(...)`. The script then reads those traits back via `$art.getTraits()`.
+
+It needs a browser binary once (cached globally afterward):
+
+```
+uv run --with playwright playwright install chromium
+uv run scripts/build_buildings_data.py
+```
+
+```jsonc
+// buildings_data.json
+{
+  "buildings": [
+    {
+      "tokenId": 1,
+      "name": "BUILDING 1",
+      "traits": { "LAYOUT": "BROWNSTONE", "ARCHETYPE": "NO", "COLORWAY": "BLUE", "CIRCADIAN CYCLE": "MOSTLY AWAKE", "WINDOWS": [912, 492, …] }
+    }
+    // …one per token, in tokenId order
+  ]
+}
+```
+
+How it stays fast and correct:
+
+- It serves the repo root over a temporary localhost HTTP server, because `index.html` `fetch()`es sibling files (`art.js`, `special_building_counts.json`, `windows_keyed.json`) and loads window images — `file://` would break those.
+- We only need the trait values, which `finish()` computes before drawing, so an init script no-ops the canvas draws, caps the canvas, and skips image decode/bitmap creation. `setTraits()` is untouched, so the captured traits are identical to a real render.
+- It renders ~12 tokens in parallel; a token that genuinely fails is logged and recorded with `traits: null` rather than aborting the run.
+
+---
+
 ## Renderer notes
 
 - **`$art` is namespaced** — no collision with p5 globals or `THREE.*`. The random helpers only emit numbers/booleans/picks.
