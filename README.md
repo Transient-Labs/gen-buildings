@@ -352,6 +352,55 @@ How it stays fast and correct:
 
 ---
 
+## Prints
+
+[`prints/gen-prints-11x7.html`](./prints/gen-prints-11x7.html) is a standalone, print-ready renderer for a generative print-order flow: a buyer picks a size, the piece animates in front of them, and the **same inputs** reproduce a high-resolution print master. It doesn't use `art.js` — it has its own small seeded PRNG so the window selection is reproducible from the URL.
+
+### URL params
+
+| Param    | Role                                                                 |
+| -------- | ------------------------------------------------------------------- |
+| `size`   | `0` \| `1` \| `2` → 10×8 \| 20×16 \| 30×24 in. Drives the render **and** the bottom caption. Defaults to `0`. |
+| `seed`   | Any string. Reproduces the exact window selection. Absent → a random seed each load. |
+| `print`  | The print number shown in the caption (e.g. `?print=1` → `#1`). Defaults to `1`. |
+| `capture`| `1` → headless capture mode (see below).                            |
+
+The canvas is the native print resolution at 300 DPI — **3000×2400 / 6000×4800 / 9000×7200** for size 0 / 1 / 2 — exactly 5:4 including the outer border. The bottom-left caption (`Block 0, 8"x10", #1`) renders in web-safe Courier New.
+
+### Capturing the print master
+
+The render is **deterministic**: persist `{ seed, size, print }` at order time and you can regenerate any order's master forever. Treat the browser as a preview and produce the master with a headless re-render.
+
+Three hooks are exposed for this:
+
+- **`window.exportPNG()`** → `Promise<Blob>` of the canvas at full native resolution (the actual bitmap, not a screenshot).
+- **`window.savePNG()`** → downloads that PNG (`block0-size{N}-print{N}-{W}x{H}.png`). Pressing **`s`** does the same, for manual testing.
+- **`?capture=1`** → headless mode: forces full resolution (bypasses the live-preview downscale), skips the reveal animation to the settled frame, and signals readiness via `window.__renderReady = true` and `<body data-render-ready="1">`.
+
+A backend capture then looks like:
+
+```js
+// navigate headless to:
+//   prints/gen-prints-11x7.html?size=0&seed=ABC&print=1&capture=1
+await page.waitForSelector('body[data-render-ready="1"]');
+const dataUrl = await page.evaluate(async () => {
+  const blob = await window.exportPNG();
+  return await new Promise((res) => {
+    const r = new FileReader();
+    r.onload = () => res(r.result);
+    r.readAsDataURL(blob);
+  });
+});
+// dataUrl -> decode -> store -> send to fulfillment
+```
+
+Two gotchas:
+
+- **Serve same-origin.** `canvas.toBlob()` throws on a tainted canvas, so the window webps must be same-origin (or CORS-clean). Serving the repo from one server handles it.
+- **Fonts on a render box.** Courier New is web-safe on consumer OSes but not on a headless Linux server — install it there (e.g. `ttf-mscorefonts-installer`) or the caption falls back to a different monospace.
+
+---
+
 ## Renderer notes
 
 - **`$art` is namespaced** — no collision with p5 globals or `THREE.*`. The random helpers only emit numbers/booleans/picks.

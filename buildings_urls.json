@@ -9119,6 +9119,886 @@
       "tokenId": 1824,
       "name": "BUILDING 1824",
       "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1824&blockhash=0x1b3937ea6be4835f70e9b3f1fd4c9f7482ca052044804ff129bce6820fd5f195&txHash=0x2d8275ec3506eb8b558baa7273da7f4f8f0baa5f98cfc1b948699c571f39b955&minter=0x41d3ea0d6a64d603cb8c3ff710f05f546061cdde&gasUsed=206772&gasPrice=2213476936"
+    },
+    {
+      "tokenId": 1825,
+      "name": "BUILDING 1825",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1825&blockhash=0x74a7e2bbd5dc8df3a524156c0b0513eabe9730b7a664c372ef2618d82d86dcc6&txHash=0xec017b543bb2a691969650da67eb992c9ad4bee46c4a9eba01e9c7d29885441f&minter=0x68bca5a8bdebe05fb8a6648c7316b4eb7e19a064&gasUsed=240972&gasPrice=2182660393"
+    },
+    {
+      "tokenId": 1826,
+      "name": "BUILDING 1826",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1826&blockhash=0x24bc0a6a72a14ed2a41c91819f0ec21735a338b10dbee10d9ef26d8254c6d09a&txHash=0x1d096531cdfa5114590718e9ff76690bd7298e0405a2108b437d29ae06c6e524&minter=0x58802afa85d68c749baef41966eda09a5fe094e3&gasUsed=223872&gasPrice=314783532"
+    },
+    {
+      "tokenId": 1827,
+      "name": "BUILDING 1827",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1827&blockhash=0xc21394ed5cdcebd436f2653897cb8d96279d25a5e2a00f4c1e92c0820f284b2a&txHash=0xfb383898b9079ff02def3cbb2497d12ca5eb1336289eeb12e0f01a1adc304428&minter=0x8f2ed3172e9c7f352a647f542541134755564e9d&gasUsed=206772&gasPrice=413682957"
+    },
+    {
+      "tokenId": 1828,
+      "name": "BUILDING 1828",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1828&blockhash=0xa461f86a4f20c0084c8cb27158fe004ee844fc829d1e73accaad16d9bf8d4e5a&txHash=0xc2f068c545928c1c02978d520694f2e9535da0da31d1086988c7bf5a6534767f&minter=0x02201d4b12a8e81b7a9e515a8f72604e8042d73b&gasUsed=240972&gasPrice=2131911376"
+    },
+    {
+      "tokenId": 1829,
+      "name": "BUILDING 1829",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1829&blockhash=0x1e5e9c274937287e55e83a5f0c05b561e8698e6db36ec2fff6744f67be3cdf31&txHash=0x710efc8ea4ece0ef71327059dad6a376dfae25b14de2abdc9528d701432514cd&minter=0x58802afa85d68c749baef41966eda09a5fe094e3&gasUsed=283210&gasPrice=172560055"
+    },
+    {
+      "tokenId": 1830,
+      "name": "BUILDING 1830",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1830&blockhash=0x1e5e9c274937287e55e83a5f0c05b561e8698e6db36ec2fff6744f67be3cdf31&txHash=0x710efc8ea4ece0ef71327059dad6a376dfae25b14de2abdc9528d701432514cd&minter=0x58802afa85d68c749baef41966eda09a5fe094e3&gasUsed=283210&gasPrice=172560055"
+    },
+    {
+      "tokenId": 1831,
+      "name": "BUILDING 1831",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1831&blockhash=0xefa75cebccd58329cde573c077b1246134e41c9195009c82fc3c9f28910e28c4&txHash=0x2d23a5368f8014531e853edb77a059e13dc08f6dbc69adcc3afe72f44c749613&minter=0x97ad7704d47b5827a5cc18c2e57f8643f1bdaad3&gasUsed=206772&gasPrice=622413649"
+    },
+    {
+      "tokenId": 1832,
+      "name": "BUILDING 1832",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1832&blockhash=0x3ec2b07b310e1111a5616a246a806ac710648cb99b0153c9a7573238dd7aa4b5&txHash=0x40be3e38a4304db3759283b1fe65a7feb96292ae43682ec50b63d08a2e3f4e19&minter=0x97ad7704d47b5827a5cc18c2e57f8643f1bdaad3&gasUsed=206772&gasPrice=645879917"
+    },
+    {
+      "tokenId": 1833,
+      "name": "BUILDING 1833",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1833&blockhash=0x196bccdd2429e7f57e2d873949012b10d806db865f96eedd74b47c9a14d1d76e&txHash=0xf8bde34754a432435bb44046e75216e005b36d128e09e630ddab55d4b8c2631b&minter=0x643369a63407525585d2c24ee75bae52d7d72eb3&gasUsed=240972&gasPrice=2248864910"
+    },
+    {
+      "tokenId": 1834,
+      "name": "BUILDING 1834",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1834&blockhash=0xbb0d3708550b682db44b09f5c1b4da8e350960d74f1958f03aac990e866cb6a3&txHash=0x76366850b5e7942ecedb7ada2131948b2949b500ae04f8f8df8bbf1bfa0cc939&minter=0x81974c1a09e53c5129c6e4f74e547fda0adf4d2d&gasUsed=1156213&gasPrice=2151727460"
+    },
+    {
+      "tokenId": 1835,
+      "name": "BUILDING 1835",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1835&blockhash=0xbb0d3708550b682db44b09f5c1b4da8e350960d74f1958f03aac990e866cb6a3&txHash=0x76366850b5e7942ecedb7ada2131948b2949b500ae04f8f8df8bbf1bfa0cc939&minter=0x81974c1a09e53c5129c6e4f74e547fda0adf4d2d&gasUsed=1156213&gasPrice=2151727460"
+    },
+    {
+      "tokenId": 1836,
+      "name": "BUILDING 1836",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1836&blockhash=0xbb0d3708550b682db44b09f5c1b4da8e350960d74f1958f03aac990e866cb6a3&txHash=0x76366850b5e7942ecedb7ada2131948b2949b500ae04f8f8df8bbf1bfa0cc939&minter=0x81974c1a09e53c5129c6e4f74e547fda0adf4d2d&gasUsed=1156213&gasPrice=2151727460"
+    },
+    {
+      "tokenId": 1837,
+      "name": "BUILDING 1837",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1837&blockhash=0xbb0d3708550b682db44b09f5c1b4da8e350960d74f1958f03aac990e866cb6a3&txHash=0x76366850b5e7942ecedb7ada2131948b2949b500ae04f8f8df8bbf1bfa0cc939&minter=0x81974c1a09e53c5129c6e4f74e547fda0adf4d2d&gasUsed=1156213&gasPrice=2151727460"
+    },
+    {
+      "tokenId": 1838,
+      "name": "BUILDING 1838",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1838&blockhash=0xbb0d3708550b682db44b09f5c1b4da8e350960d74f1958f03aac990e866cb6a3&txHash=0x76366850b5e7942ecedb7ada2131948b2949b500ae04f8f8df8bbf1bfa0cc939&minter=0x81974c1a09e53c5129c6e4f74e547fda0adf4d2d&gasUsed=1156213&gasPrice=2151727460"
+    },
+    {
+      "tokenId": 1839,
+      "name": "BUILDING 1839",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1839&blockhash=0xbb0d3708550b682db44b09f5c1b4da8e350960d74f1958f03aac990e866cb6a3&txHash=0x76366850b5e7942ecedb7ada2131948b2949b500ae04f8f8df8bbf1bfa0cc939&minter=0x81974c1a09e53c5129c6e4f74e547fda0adf4d2d&gasUsed=1156213&gasPrice=2151727460"
+    },
+    {
+      "tokenId": 1840,
+      "name": "BUILDING 1840",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1840&blockhash=0xbb0d3708550b682db44b09f5c1b4da8e350960d74f1958f03aac990e866cb6a3&txHash=0x76366850b5e7942ecedb7ada2131948b2949b500ae04f8f8df8bbf1bfa0cc939&minter=0x81974c1a09e53c5129c6e4f74e547fda0adf4d2d&gasUsed=1156213&gasPrice=2151727460"
+    },
+    {
+      "tokenId": 1841,
+      "name": "BUILDING 1841",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1841&blockhash=0xbb0d3708550b682db44b09f5c1b4da8e350960d74f1958f03aac990e866cb6a3&txHash=0x76366850b5e7942ecedb7ada2131948b2949b500ae04f8f8df8bbf1bfa0cc939&minter=0x81974c1a09e53c5129c6e4f74e547fda0adf4d2d&gasUsed=1156213&gasPrice=2151727460"
+    },
+    {
+      "tokenId": 1842,
+      "name": "BUILDING 1842",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1842&blockhash=0xbb0d3708550b682db44b09f5c1b4da8e350960d74f1958f03aac990e866cb6a3&txHash=0x76366850b5e7942ecedb7ada2131948b2949b500ae04f8f8df8bbf1bfa0cc939&minter=0x81974c1a09e53c5129c6e4f74e547fda0adf4d2d&gasUsed=1156213&gasPrice=2151727460"
+    },
+    {
+      "tokenId": 1843,
+      "name": "BUILDING 1843",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1843&blockhash=0xbb0d3708550b682db44b09f5c1b4da8e350960d74f1958f03aac990e866cb6a3&txHash=0x76366850b5e7942ecedb7ada2131948b2949b500ae04f8f8df8bbf1bfa0cc939&minter=0x81974c1a09e53c5129c6e4f74e547fda0adf4d2d&gasUsed=1156213&gasPrice=2151727460"
+    },
+    {
+      "tokenId": 1844,
+      "name": "BUILDING 1844",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1844&blockhash=0xbb0d3708550b682db44b09f5c1b4da8e350960d74f1958f03aac990e866cb6a3&txHash=0x76366850b5e7942ecedb7ada2131948b2949b500ae04f8f8df8bbf1bfa0cc939&minter=0x81974c1a09e53c5129c6e4f74e547fda0adf4d2d&gasUsed=1156213&gasPrice=2151727460"
+    },
+    {
+      "tokenId": 1845,
+      "name": "BUILDING 1845",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1845&blockhash=0xbb0d3708550b682db44b09f5c1b4da8e350960d74f1958f03aac990e866cb6a3&txHash=0x76366850b5e7942ecedb7ada2131948b2949b500ae04f8f8df8bbf1bfa0cc939&minter=0x81974c1a09e53c5129c6e4f74e547fda0adf4d2d&gasUsed=1156213&gasPrice=2151727460"
+    },
+    {
+      "tokenId": 1846,
+      "name": "BUILDING 1846",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1846&blockhash=0xbb0d3708550b682db44b09f5c1b4da8e350960d74f1958f03aac990e866cb6a3&txHash=0x76366850b5e7942ecedb7ada2131948b2949b500ae04f8f8df8bbf1bfa0cc939&minter=0x81974c1a09e53c5129c6e4f74e547fda0adf4d2d&gasUsed=1156213&gasPrice=2151727460"
+    },
+    {
+      "tokenId": 1847,
+      "name": "BUILDING 1847",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1847&blockhash=0xbb0d3708550b682db44b09f5c1b4da8e350960d74f1958f03aac990e866cb6a3&txHash=0x76366850b5e7942ecedb7ada2131948b2949b500ae04f8f8df8bbf1bfa0cc939&minter=0x81974c1a09e53c5129c6e4f74e547fda0adf4d2d&gasUsed=1156213&gasPrice=2151727460"
+    },
+    {
+      "tokenId": 1848,
+      "name": "BUILDING 1848",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1848&blockhash=0xbb0d3708550b682db44b09f5c1b4da8e350960d74f1958f03aac990e866cb6a3&txHash=0x76366850b5e7942ecedb7ada2131948b2949b500ae04f8f8df8bbf1bfa0cc939&minter=0x81974c1a09e53c5129c6e4f74e547fda0adf4d2d&gasUsed=1156213&gasPrice=2151727460"
+    },
+    {
+      "tokenId": 1849,
+      "name": "BUILDING 1849",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1849&blockhash=0xbb0d3708550b682db44b09f5c1b4da8e350960d74f1958f03aac990e866cb6a3&txHash=0x76366850b5e7942ecedb7ada2131948b2949b500ae04f8f8df8bbf1bfa0cc939&minter=0x81974c1a09e53c5129c6e4f74e547fda0adf4d2d&gasUsed=1156213&gasPrice=2151727460"
+    },
+    {
+      "tokenId": 1850,
+      "name": "BUILDING 1850",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1850&blockhash=0xbb0d3708550b682db44b09f5c1b4da8e350960d74f1958f03aac990e866cb6a3&txHash=0x76366850b5e7942ecedb7ada2131948b2949b500ae04f8f8df8bbf1bfa0cc939&minter=0x81974c1a09e53c5129c6e4f74e547fda0adf4d2d&gasUsed=1156213&gasPrice=2151727460"
+    },
+    {
+      "tokenId": 1851,
+      "name": "BUILDING 1851",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1851&blockhash=0x310542575b8311fdab291a3d58f6e70dcbffa27e371f48a1374afda19b245495&txHash=0xaa3223b699bfd47072c5698a96ac4e269f202f4012d1e65c07642aee561ee5d3&minter=0xe81ccab76718ac222c8c9f2d19197c9d39e9fca5&gasUsed=622151&gasPrice=2141967787"
+    },
+    {
+      "tokenId": 1852,
+      "name": "BUILDING 1852",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1852&blockhash=0x310542575b8311fdab291a3d58f6e70dcbffa27e371f48a1374afda19b245495&txHash=0xaa3223b699bfd47072c5698a96ac4e269f202f4012d1e65c07642aee561ee5d3&minter=0xe81ccab76718ac222c8c9f2d19197c9d39e9fca5&gasUsed=622151&gasPrice=2141967787"
+    },
+    {
+      "tokenId": 1853,
+      "name": "BUILDING 1853",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1853&blockhash=0x310542575b8311fdab291a3d58f6e70dcbffa27e371f48a1374afda19b245495&txHash=0xaa3223b699bfd47072c5698a96ac4e269f202f4012d1e65c07642aee561ee5d3&minter=0xe81ccab76718ac222c8c9f2d19197c9d39e9fca5&gasUsed=622151&gasPrice=2141967787"
+    },
+    {
+      "tokenId": 1854,
+      "name": "BUILDING 1854",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1854&blockhash=0x310542575b8311fdab291a3d58f6e70dcbffa27e371f48a1374afda19b245495&txHash=0xaa3223b699bfd47072c5698a96ac4e269f202f4012d1e65c07642aee561ee5d3&minter=0xe81ccab76718ac222c8c9f2d19197c9d39e9fca5&gasUsed=622151&gasPrice=2141967787"
+    },
+    {
+      "tokenId": 1855,
+      "name": "BUILDING 1855",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1855&blockhash=0x310542575b8311fdab291a3d58f6e70dcbffa27e371f48a1374afda19b245495&txHash=0xaa3223b699bfd47072c5698a96ac4e269f202f4012d1e65c07642aee561ee5d3&minter=0xe81ccab76718ac222c8c9f2d19197c9d39e9fca5&gasUsed=622151&gasPrice=2141967787"
+    },
+    {
+      "tokenId": 1856,
+      "name": "BUILDING 1856",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1856&blockhash=0x310542575b8311fdab291a3d58f6e70dcbffa27e371f48a1374afda19b245495&txHash=0xaa3223b699bfd47072c5698a96ac4e269f202f4012d1e65c07642aee561ee5d3&minter=0xe81ccab76718ac222c8c9f2d19197c9d39e9fca5&gasUsed=622151&gasPrice=2141967787"
+    },
+    {
+      "tokenId": 1857,
+      "name": "BUILDING 1857",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1857&blockhash=0x310542575b8311fdab291a3d58f6e70dcbffa27e371f48a1374afda19b245495&txHash=0xaa3223b699bfd47072c5698a96ac4e269f202f4012d1e65c07642aee561ee5d3&minter=0xe81ccab76718ac222c8c9f2d19197c9d39e9fca5&gasUsed=622151&gasPrice=2141967787"
+    },
+    {
+      "tokenId": 1858,
+      "name": "BUILDING 1858",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1858&blockhash=0x310542575b8311fdab291a3d58f6e70dcbffa27e371f48a1374afda19b245495&txHash=0xaa3223b699bfd47072c5698a96ac4e269f202f4012d1e65c07642aee561ee5d3&minter=0xe81ccab76718ac222c8c9f2d19197c9d39e9fca5&gasUsed=622151&gasPrice=2141967787"
+    },
+    {
+      "tokenId": 1859,
+      "name": "BUILDING 1859",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1859&blockhash=0x1bb08270cb2a154bd37fdd966c722b183457a89725e2cdca802610eb7bcdb703&txHash=0x21cac048a6008a2d59754bad8aaa321a91ebfac3c1fc5e461d9c4526c2265eb1&minter=0xa171574706d53ba0a237fe4badf79a71fae0b480&gasUsed=206772&gasPrice=2133429390"
+    },
+    {
+      "tokenId": 1860,
+      "name": "BUILDING 1860",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1860&blockhash=0x1492407bf4356d47d008e8a5e10acdf44d9d6685c80019e8d6b41509334b0677&txHash=0xe7d3381776457479743debd6b87d7df29e43d1219f792352eb3a16c05c1157bf&minter=0xe81ccab76718ac222c8c9f2d19197c9d39e9fca5&gasUsed=325451&gasPrice=2174390912"
+    },
+    {
+      "tokenId": 1861,
+      "name": "BUILDING 1861",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1861&blockhash=0x1492407bf4356d47d008e8a5e10acdf44d9d6685c80019e8d6b41509334b0677&txHash=0xe7d3381776457479743debd6b87d7df29e43d1219f792352eb3a16c05c1157bf&minter=0xe81ccab76718ac222c8c9f2d19197c9d39e9fca5&gasUsed=325451&gasPrice=2174390912"
+    },
+    {
+      "tokenId": 1862,
+      "name": "BUILDING 1862",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1862&blockhash=0x1492407bf4356d47d008e8a5e10acdf44d9d6685c80019e8d6b41509334b0677&txHash=0xe7d3381776457479743debd6b87d7df29e43d1219f792352eb3a16c05c1157bf&minter=0xe81ccab76718ac222c8c9f2d19197c9d39e9fca5&gasUsed=325451&gasPrice=2174390912"
+    },
+    {
+      "tokenId": 1863,
+      "name": "BUILDING 1863",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1863&blockhash=0x35ddb49538ef9aa15a62484598dd9596d1b583704e027eacb8ad2644b0d482d9&txHash=0x6b8cc9b605b9a5f0357b95421b73059bf80fbab0bdfab100e2e43227236e3d09&minter=0x196ab3e637219ea9d2efdec0523006af0c1fc8f1&gasUsed=206772&gasPrice=265837080"
+    },
+    {
+      "tokenId": 1864,
+      "name": "BUILDING 1864",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1864&blockhash=0x1b832d2200406dce2d4abef240495bc16fc6da7b8f10de4fda577b623a64174e&txHash=0x1746e0a5fc99cc540996a03c427458024aa69fc0e70fd0a45b8d5d235206f1ca&minter=0x7f03484ae2c2c927ffb8df53b7d0f5acdceea68b&gasUsed=223872&gasPrice=2176556562"
+    },
+    {
+      "tokenId": 1865,
+      "name": "BUILDING 1865",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1865&blockhash=0x0b87f6ed0bb2026166c18a8fd5545af015c87b8cb79ff9d9070e3cb329466459&txHash=0xdb8fc95fad849f563370d54261e5f20607a531b4c123872ff1714ddfb60abe72&minter=0x3479c2d27ee9bed28f2d20e0a055230a15d8a8be&gasUsed=446132&gasPrice=2164127819"
+    },
+    {
+      "tokenId": 1866,
+      "name": "BUILDING 1866",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1866&blockhash=0x0b87f6ed0bb2026166c18a8fd5545af015c87b8cb79ff9d9070e3cb329466459&txHash=0xdb8fc95fad849f563370d54261e5f20607a531b4c123872ff1714ddfb60abe72&minter=0x3479c2d27ee9bed28f2d20e0a055230a15d8a8be&gasUsed=446132&gasPrice=2164127819"
+    },
+    {
+      "tokenId": 1867,
+      "name": "BUILDING 1867",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1867&blockhash=0x0b87f6ed0bb2026166c18a8fd5545af015c87b8cb79ff9d9070e3cb329466459&txHash=0xdb8fc95fad849f563370d54261e5f20607a531b4c123872ff1714ddfb60abe72&minter=0x3479c2d27ee9bed28f2d20e0a055230a15d8a8be&gasUsed=446132&gasPrice=2164127819"
+    },
+    {
+      "tokenId": 1868,
+      "name": "BUILDING 1868",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1868&blockhash=0x0b87f6ed0bb2026166c18a8fd5545af015c87b8cb79ff9d9070e3cb329466459&txHash=0xdb8fc95fad849f563370d54261e5f20607a531b4c123872ff1714ddfb60abe72&minter=0x3479c2d27ee9bed28f2d20e0a055230a15d8a8be&gasUsed=446132&gasPrice=2164127819"
+    },
+    {
+      "tokenId": 1869,
+      "name": "BUILDING 1869",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1869&blockhash=0x0b87f6ed0bb2026166c18a8fd5545af015c87b8cb79ff9d9070e3cb329466459&txHash=0xdb8fc95fad849f563370d54261e5f20607a531b4c123872ff1714ddfb60abe72&minter=0x3479c2d27ee9bed28f2d20e0a055230a15d8a8be&gasUsed=446132&gasPrice=2164127819"
+    },
+    {
+      "tokenId": 1870,
+      "name": "BUILDING 1870",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1870&blockhash=0x881716bfb27a3f2eb032076e167fe648ac3fd5c4562fabd7ea76d4159ae62739&txHash=0xc2d924b963c7956a6d3361b87884fc1197edb08cfb158a8f431866c9a0b074c0&minter=0x3479c2d27ee9bed28f2d20e0a055230a15d8a8be&gasUsed=700589&gasPrice=2142294809"
+    },
+    {
+      "tokenId": 1871,
+      "name": "BUILDING 1871",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1871&blockhash=0x881716bfb27a3f2eb032076e167fe648ac3fd5c4562fabd7ea76d4159ae62739&txHash=0xc2d924b963c7956a6d3361b87884fc1197edb08cfb158a8f431866c9a0b074c0&minter=0x3479c2d27ee9bed28f2d20e0a055230a15d8a8be&gasUsed=700589&gasPrice=2142294809"
+    },
+    {
+      "tokenId": 1872,
+      "name": "BUILDING 1872",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1872&blockhash=0x881716bfb27a3f2eb032076e167fe648ac3fd5c4562fabd7ea76d4159ae62739&txHash=0xc2d924b963c7956a6d3361b87884fc1197edb08cfb158a8f431866c9a0b074c0&minter=0x3479c2d27ee9bed28f2d20e0a055230a15d8a8be&gasUsed=700589&gasPrice=2142294809"
+    },
+    {
+      "tokenId": 1873,
+      "name": "BUILDING 1873",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1873&blockhash=0x881716bfb27a3f2eb032076e167fe648ac3fd5c4562fabd7ea76d4159ae62739&txHash=0xc2d924b963c7956a6d3361b87884fc1197edb08cfb158a8f431866c9a0b074c0&minter=0x3479c2d27ee9bed28f2d20e0a055230a15d8a8be&gasUsed=700589&gasPrice=2142294809"
+    },
+    {
+      "tokenId": 1874,
+      "name": "BUILDING 1874",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1874&blockhash=0x881716bfb27a3f2eb032076e167fe648ac3fd5c4562fabd7ea76d4159ae62739&txHash=0xc2d924b963c7956a6d3361b87884fc1197edb08cfb158a8f431866c9a0b074c0&minter=0x3479c2d27ee9bed28f2d20e0a055230a15d8a8be&gasUsed=700589&gasPrice=2142294809"
+    },
+    {
+      "tokenId": 1875,
+      "name": "BUILDING 1875",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1875&blockhash=0x881716bfb27a3f2eb032076e167fe648ac3fd5c4562fabd7ea76d4159ae62739&txHash=0xc2d924b963c7956a6d3361b87884fc1197edb08cfb158a8f431866c9a0b074c0&minter=0x3479c2d27ee9bed28f2d20e0a055230a15d8a8be&gasUsed=700589&gasPrice=2142294809"
+    },
+    {
+      "tokenId": 1876,
+      "name": "BUILDING 1876",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1876&blockhash=0x881716bfb27a3f2eb032076e167fe648ac3fd5c4562fabd7ea76d4159ae62739&txHash=0xc2d924b963c7956a6d3361b87884fc1197edb08cfb158a8f431866c9a0b074c0&minter=0x3479c2d27ee9bed28f2d20e0a055230a15d8a8be&gasUsed=700589&gasPrice=2142294809"
+    },
+    {
+      "tokenId": 1877,
+      "name": "BUILDING 1877",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1877&blockhash=0x881716bfb27a3f2eb032076e167fe648ac3fd5c4562fabd7ea76d4159ae62739&txHash=0xc2d924b963c7956a6d3361b87884fc1197edb08cfb158a8f431866c9a0b074c0&minter=0x3479c2d27ee9bed28f2d20e0a055230a15d8a8be&gasUsed=700589&gasPrice=2142294809"
+    },
+    {
+      "tokenId": 1878,
+      "name": "BUILDING 1878",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1878&blockhash=0x881716bfb27a3f2eb032076e167fe648ac3fd5c4562fabd7ea76d4159ae62739&txHash=0xc2d924b963c7956a6d3361b87884fc1197edb08cfb158a8f431866c9a0b074c0&minter=0x3479c2d27ee9bed28f2d20e0a055230a15d8a8be&gasUsed=700589&gasPrice=2142294809"
+    },
+    {
+      "tokenId": 1879,
+      "name": "BUILDING 1879",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1879&blockhash=0x614a08edc67a590a11a5ac7eb3050515c6b48abe58c80dcac3f8e622b0d7d858&txHash=0x0f30650c1de3d3bc858b47b9ce99467284051426d4f28cb2bd94b0aa05551d63&minter=0x58478dd186cbd8e14f4ac239eaf2d0a98b35c786&gasUsed=300310&gasPrice=194579681"
+    },
+    {
+      "tokenId": 1880,
+      "name": "BUILDING 1880",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1880&blockhash=0x614a08edc67a590a11a5ac7eb3050515c6b48abe58c80dcac3f8e622b0d7d858&txHash=0x0f30650c1de3d3bc858b47b9ce99467284051426d4f28cb2bd94b0aa05551d63&minter=0x58478dd186cbd8e14f4ac239eaf2d0a98b35c786&gasUsed=300310&gasPrice=194579681"
+    },
+    {
+      "tokenId": 1881,
+      "name": "BUILDING 1881",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1881&blockhash=0x8cc881f885cdcf5d90b11a730ccce46f81c48dfaaa32fe67340b18a4b08aa63d&txHash=0x8868dbd19c66ffde371411d7967151e011be199a22efe4b51ca5884522e79fff&minter=0x736576018f8afa9d5a22b43769804cd3efdb1129&gasUsed=206772&gasPrice=2159619208"
+    },
+    {
+      "tokenId": 1882,
+      "name": "BUILDING 1882",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1882&blockhash=0x435d67c35243d1f64133618855de81b29bfce327c74a28b4812be89dcc991470&txHash=0x0a1aad0560fe3dc4212cb24778f5560c40c43be039f61aa2f405dcfcbec82534&minter=0x736576018f8afa9d5a22b43769804cd3efdb1129&gasUsed=206772&gasPrice=2159037328"
+    },
+    {
+      "tokenId": 1883,
+      "name": "BUILDING 1883",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1883&blockhash=0x247080acf855feca7f0da5ab23a7271b523fead0e2e813ef465178a6d63abdd3&txHash=0xdd371b05a8a18ebf55e22e531141c318d20fd30723a3cf79a742b7b14b589575&minter=0x736576018f8afa9d5a22b43769804cd3efdb1129&gasUsed=206772&gasPrice=2150228689"
+    },
+    {
+      "tokenId": 1884,
+      "name": "BUILDING 1884",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1884&blockhash=0xa4e0c3a36a6bc74828082fff1d840ca59ad80656c0924d18d9cf28e2fb39cb94&txHash=0x28a8e8d63e60796d8e25c93cbe748d7b37ff1305abd5fb1f952b9a72004d3b88&minter=0x7a08e0799c228fbe8ba00a4583157eb7014a20e5&gasUsed=283210&gasPrice=2102825608"
+    },
+    {
+      "tokenId": 1885,
+      "name": "BUILDING 1885",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1885&blockhash=0xa4e0c3a36a6bc74828082fff1d840ca59ad80656c0924d18d9cf28e2fb39cb94&txHash=0x28a8e8d63e60796d8e25c93cbe748d7b37ff1305abd5fb1f952b9a72004d3b88&minter=0x7a08e0799c228fbe8ba00a4583157eb7014a20e5&gasUsed=283210&gasPrice=2102825608"
+    },
+    {
+      "tokenId": 1886,
+      "name": "BUILDING 1886",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1886&blockhash=0x67868dc1cd55b1e773503a91968f412fc1a34c69a0088772cbe04ac8f60db44f&txHash=0x89730be9063fba78858ea712902772bdff475f43bc6b7c0ddf458fbe9e995635&minter=0x0f0eae91990140c560d4156db4f00c854dc8f09e&gasUsed=418990&gasPrice=2161458865"
+    },
+    {
+      "tokenId": 1887,
+      "name": "BUILDING 1887",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1887&blockhash=0x67868dc1cd55b1e773503a91968f412fc1a34c69a0088772cbe04ac8f60db44f&txHash=0x89730be9063fba78858ea712902772bdff475f43bc6b7c0ddf458fbe9e995635&minter=0x0f0eae91990140c560d4156db4f00c854dc8f09e&gasUsed=418990&gasPrice=2161458865"
+    },
+    {
+      "tokenId": 1888,
+      "name": "BUILDING 1888",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1888&blockhash=0x67868dc1cd55b1e773503a91968f412fc1a34c69a0088772cbe04ac8f60db44f&txHash=0x89730be9063fba78858ea712902772bdff475f43bc6b7c0ddf458fbe9e995635&minter=0x0f0eae91990140c560d4156db4f00c854dc8f09e&gasUsed=418990&gasPrice=2161458865"
+    },
+    {
+      "tokenId": 1889,
+      "name": "BUILDING 1889",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1889&blockhash=0x67868dc1cd55b1e773503a91968f412fc1a34c69a0088772cbe04ac8f60db44f&txHash=0x89730be9063fba78858ea712902772bdff475f43bc6b7c0ddf458fbe9e995635&minter=0x0f0eae91990140c560d4156db4f00c854dc8f09e&gasUsed=418990&gasPrice=2161458865"
+    },
+    {
+      "tokenId": 1890,
+      "name": "BUILDING 1890",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1890&blockhash=0x6819e1c8200c7e7fc79540face6738ffae3a572db0f405a98279ed0633552dbc&txHash=0xb875c528cecf634dc302f23004d90c794e70a450dae29cc70e42016afc50e090&minter=0xbe2774059d8f88f17765490afe765e8284e1c98f&gasUsed=300310&gasPrice=2325827972"
+    },
+    {
+      "tokenId": 1891,
+      "name": "BUILDING 1891",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1891&blockhash=0x6819e1c8200c7e7fc79540face6738ffae3a572db0f405a98279ed0633552dbc&txHash=0xb875c528cecf634dc302f23004d90c794e70a450dae29cc70e42016afc50e090&minter=0xbe2774059d8f88f17765490afe765e8284e1c98f&gasUsed=300310&gasPrice=2325827972"
+    },
+    {
+      "tokenId": 1892,
+      "name": "BUILDING 1892",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1892&blockhash=0xcc541959258e9cd823eb0c56b85a5238143f4dd418755110317222585ae3d1b9&txHash=0x3b9cd974a5eef014c87fba63b1ded74e7430c61d431cd2e573052f0a1065793d&minter=0x623413ce1ed560d5e3bfd99fa33e12a1c5de5b4c&gasUsed=478332&gasPrice=2177928852"
+    },
+    {
+      "tokenId": 1893,
+      "name": "BUILDING 1893",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1893&blockhash=0xcc541959258e9cd823eb0c56b85a5238143f4dd418755110317222585ae3d1b9&txHash=0x3b9cd974a5eef014c87fba63b1ded74e7430c61d431cd2e573052f0a1065793d&minter=0x623413ce1ed560d5e3bfd99fa33e12a1c5de5b4c&gasUsed=478332&gasPrice=2177928852"
+    },
+    {
+      "tokenId": 1894,
+      "name": "BUILDING 1894",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1894&blockhash=0xcc541959258e9cd823eb0c56b85a5238143f4dd418755110317222585ae3d1b9&txHash=0x3b9cd974a5eef014c87fba63b1ded74e7430c61d431cd2e573052f0a1065793d&minter=0x623413ce1ed560d5e3bfd99fa33e12a1c5de5b4c&gasUsed=478332&gasPrice=2177928852"
+    },
+    {
+      "tokenId": 1895,
+      "name": "BUILDING 1895",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1895&blockhash=0xcc541959258e9cd823eb0c56b85a5238143f4dd418755110317222585ae3d1b9&txHash=0x3b9cd974a5eef014c87fba63b1ded74e7430c61d431cd2e573052f0a1065793d&minter=0x623413ce1ed560d5e3bfd99fa33e12a1c5de5b4c&gasUsed=478332&gasPrice=2177928852"
+    },
+    {
+      "tokenId": 1896,
+      "name": "BUILDING 1896",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1896&blockhash=0xcc541959258e9cd823eb0c56b85a5238143f4dd418755110317222585ae3d1b9&txHash=0x3b9cd974a5eef014c87fba63b1ded74e7430c61d431cd2e573052f0a1065793d&minter=0x623413ce1ed560d5e3bfd99fa33e12a1c5de5b4c&gasUsed=478332&gasPrice=2177928852"
+    },
+    {
+      "tokenId": 1897,
+      "name": "BUILDING 1897",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1897&blockhash=0xa41be27f8bc20544ec789aea0f4ea7f75b6c1f5b15dccfeb1229647d0eddd625&txHash=0x86640b8e521f17b52beadc5c2f87d96afbe8d3f5ec62c6e5f9d00e461155f648&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=740831&gasPrice=2233958705"
+    },
+    {
+      "tokenId": 1898,
+      "name": "BUILDING 1898",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1898&blockhash=0xa41be27f8bc20544ec789aea0f4ea7f75b6c1f5b15dccfeb1229647d0eddd625&txHash=0x86640b8e521f17b52beadc5c2f87d96afbe8d3f5ec62c6e5f9d00e461155f648&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=740831&gasPrice=2233958705"
+    },
+    {
+      "tokenId": 1899,
+      "name": "BUILDING 1899",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1899&blockhash=0xa41be27f8bc20544ec789aea0f4ea7f75b6c1f5b15dccfeb1229647d0eddd625&txHash=0x86640b8e521f17b52beadc5c2f87d96afbe8d3f5ec62c6e5f9d00e461155f648&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=740831&gasPrice=2233958705"
+    },
+    {
+      "tokenId": 1900,
+      "name": "BUILDING 1900",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1900&blockhash=0xa41be27f8bc20544ec789aea0f4ea7f75b6c1f5b15dccfeb1229647d0eddd625&txHash=0x86640b8e521f17b52beadc5c2f87d96afbe8d3f5ec62c6e5f9d00e461155f648&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=740831&gasPrice=2233958705"
+    },
+    {
+      "tokenId": 1901,
+      "name": "BUILDING 1901",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1901&blockhash=0xa41be27f8bc20544ec789aea0f4ea7f75b6c1f5b15dccfeb1229647d0eddd625&txHash=0x86640b8e521f17b52beadc5c2f87d96afbe8d3f5ec62c6e5f9d00e461155f648&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=740831&gasPrice=2233958705"
+    },
+    {
+      "tokenId": 1902,
+      "name": "BUILDING 1902",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1902&blockhash=0xa41be27f8bc20544ec789aea0f4ea7f75b6c1f5b15dccfeb1229647d0eddd625&txHash=0x86640b8e521f17b52beadc5c2f87d96afbe8d3f5ec62c6e5f9d00e461155f648&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=740831&gasPrice=2233958705"
+    },
+    {
+      "tokenId": 1903,
+      "name": "BUILDING 1903",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1903&blockhash=0xa41be27f8bc20544ec789aea0f4ea7f75b6c1f5b15dccfeb1229647d0eddd625&txHash=0x86640b8e521f17b52beadc5c2f87d96afbe8d3f5ec62c6e5f9d00e461155f648&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=740831&gasPrice=2233958705"
+    },
+    {
+      "tokenId": 1904,
+      "name": "BUILDING 1904",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1904&blockhash=0xa41be27f8bc20544ec789aea0f4ea7f75b6c1f5b15dccfeb1229647d0eddd625&txHash=0x86640b8e521f17b52beadc5c2f87d96afbe8d3f5ec62c6e5f9d00e461155f648&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=740831&gasPrice=2233958705"
+    },
+    {
+      "tokenId": 1905,
+      "name": "BUILDING 1905",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1905&blockhash=0xa41be27f8bc20544ec789aea0f4ea7f75b6c1f5b15dccfeb1229647d0eddd625&txHash=0x86640b8e521f17b52beadc5c2f87d96afbe8d3f5ec62c6e5f9d00e461155f648&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=740831&gasPrice=2233958705"
+    },
+    {
+      "tokenId": 1906,
+      "name": "BUILDING 1906",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1906&blockhash=0xa41be27f8bc20544ec789aea0f4ea7f75b6c1f5b15dccfeb1229647d0eddd625&txHash=0x86640b8e521f17b52beadc5c2f87d96afbe8d3f5ec62c6e5f9d00e461155f648&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=740831&gasPrice=2233958705"
+    },
+    {
+      "tokenId": 1907,
+      "name": "BUILDING 1907",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1907&blockhash=0xa5b59917c3182962e7e6472588d25094068ceb47553140c9d52501f1284d5046&txHash=0x856d64e48d1c9f26aa9fcc74ef2487f770e7e8973208d2c147bd699578914e36&minter=0x59d44f2d8e608cee2c3e57da5a5de3bf192a36c3&gasUsed=401890&gasPrice=2129625534"
+    },
+    {
+      "tokenId": 1908,
+      "name": "BUILDING 1908",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1908&blockhash=0xa5b59917c3182962e7e6472588d25094068ceb47553140c9d52501f1284d5046&txHash=0x856d64e48d1c9f26aa9fcc74ef2487f770e7e8973208d2c147bd699578914e36&minter=0x59d44f2d8e608cee2c3e57da5a5de3bf192a36c3&gasUsed=401890&gasPrice=2129625534"
+    },
+    {
+      "tokenId": 1909,
+      "name": "BUILDING 1909",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1909&blockhash=0xa5b59917c3182962e7e6472588d25094068ceb47553140c9d52501f1284d5046&txHash=0x856d64e48d1c9f26aa9fcc74ef2487f770e7e8973208d2c147bd699578914e36&minter=0x59d44f2d8e608cee2c3e57da5a5de3bf192a36c3&gasUsed=401890&gasPrice=2129625534"
+    },
+    {
+      "tokenId": 1910,
+      "name": "BUILDING 1910",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1910&blockhash=0xa5b59917c3182962e7e6472588d25094068ceb47553140c9d52501f1284d5046&txHash=0x856d64e48d1c9f26aa9fcc74ef2487f770e7e8973208d2c147bd699578914e36&minter=0x59d44f2d8e608cee2c3e57da5a5de3bf192a36c3&gasUsed=401890&gasPrice=2129625534"
+    },
+    {
+      "tokenId": 1911,
+      "name": "BUILDING 1911",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1911&blockhash=0x1f55697d43f1798214b551f721f7e5ef46bd5394763672bd5abbf9733d75f5a5&txHash=0x510d4a162935f0b8c0c7791613017bdf5dc926d09d3c0359a43735bbf0f98a3f&minter=0x6b2af62e0bb72761241f35d6796b64b98fe1bd1c&gasUsed=240972&gasPrice=2095374893"
+    },
+    {
+      "tokenId": 1912,
+      "name": "BUILDING 1912",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1912&blockhash=0x9fc9d6bfb1678a88672ab2d22157d31482fb72371f390d8a34b1431f0ce1b490&txHash=0xa585fcfb5d98e24880e0c9c26275db3e6d5243639e57fa49a77f5534cfb36232&minter=0x7d88f221e9ecef9eef118e0d0e8a47f81b37e0b6&gasUsed=1037532&gasPrice=2111639700"
+    },
+    {
+      "tokenId": 1913,
+      "name": "BUILDING 1913",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1913&blockhash=0x9fc9d6bfb1678a88672ab2d22157d31482fb72371f390d8a34b1431f0ce1b490&txHash=0xa585fcfb5d98e24880e0c9c26275db3e6d5243639e57fa49a77f5534cfb36232&minter=0x7d88f221e9ecef9eef118e0d0e8a47f81b37e0b6&gasUsed=1037532&gasPrice=2111639700"
+    },
+    {
+      "tokenId": 1914,
+      "name": "BUILDING 1914",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1914&blockhash=0x9fc9d6bfb1678a88672ab2d22157d31482fb72371f390d8a34b1431f0ce1b490&txHash=0xa585fcfb5d98e24880e0c9c26275db3e6d5243639e57fa49a77f5534cfb36232&minter=0x7d88f221e9ecef9eef118e0d0e8a47f81b37e0b6&gasUsed=1037532&gasPrice=2111639700"
+    },
+    {
+      "tokenId": 1915,
+      "name": "BUILDING 1915",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1915&blockhash=0x9fc9d6bfb1678a88672ab2d22157d31482fb72371f390d8a34b1431f0ce1b490&txHash=0xa585fcfb5d98e24880e0c9c26275db3e6d5243639e57fa49a77f5534cfb36232&minter=0x7d88f221e9ecef9eef118e0d0e8a47f81b37e0b6&gasUsed=1037532&gasPrice=2111639700"
+    },
+    {
+      "tokenId": 1916,
+      "name": "BUILDING 1916",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1916&blockhash=0x9fc9d6bfb1678a88672ab2d22157d31482fb72371f390d8a34b1431f0ce1b490&txHash=0xa585fcfb5d98e24880e0c9c26275db3e6d5243639e57fa49a77f5534cfb36232&minter=0x7d88f221e9ecef9eef118e0d0e8a47f81b37e0b6&gasUsed=1037532&gasPrice=2111639700"
+    },
+    {
+      "tokenId": 1917,
+      "name": "BUILDING 1917",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1917&blockhash=0x9fc9d6bfb1678a88672ab2d22157d31482fb72371f390d8a34b1431f0ce1b490&txHash=0xa585fcfb5d98e24880e0c9c26275db3e6d5243639e57fa49a77f5534cfb36232&minter=0x7d88f221e9ecef9eef118e0d0e8a47f81b37e0b6&gasUsed=1037532&gasPrice=2111639700"
+    },
+    {
+      "tokenId": 1918,
+      "name": "BUILDING 1918",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1918&blockhash=0x9fc9d6bfb1678a88672ab2d22157d31482fb72371f390d8a34b1431f0ce1b490&txHash=0xa585fcfb5d98e24880e0c9c26275db3e6d5243639e57fa49a77f5534cfb36232&minter=0x7d88f221e9ecef9eef118e0d0e8a47f81b37e0b6&gasUsed=1037532&gasPrice=2111639700"
+    },
+    {
+      "tokenId": 1919,
+      "name": "BUILDING 1919",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1919&blockhash=0x9fc9d6bfb1678a88672ab2d22157d31482fb72371f390d8a34b1431f0ce1b490&txHash=0xa585fcfb5d98e24880e0c9c26275db3e6d5243639e57fa49a77f5534cfb36232&minter=0x7d88f221e9ecef9eef118e0d0e8a47f81b37e0b6&gasUsed=1037532&gasPrice=2111639700"
+    },
+    {
+      "tokenId": 1920,
+      "name": "BUILDING 1920",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1920&blockhash=0x9fc9d6bfb1678a88672ab2d22157d31482fb72371f390d8a34b1431f0ce1b490&txHash=0xa585fcfb5d98e24880e0c9c26275db3e6d5243639e57fa49a77f5534cfb36232&minter=0x7d88f221e9ecef9eef118e0d0e8a47f81b37e0b6&gasUsed=1037532&gasPrice=2111639700"
+    },
+    {
+      "tokenId": 1921,
+      "name": "BUILDING 1921",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1921&blockhash=0x9fc9d6bfb1678a88672ab2d22157d31482fb72371f390d8a34b1431f0ce1b490&txHash=0xa585fcfb5d98e24880e0c9c26275db3e6d5243639e57fa49a77f5534cfb36232&minter=0x7d88f221e9ecef9eef118e0d0e8a47f81b37e0b6&gasUsed=1037532&gasPrice=2111639700"
+    },
+    {
+      "tokenId": 1922,
+      "name": "BUILDING 1922",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1922&blockhash=0x9fc9d6bfb1678a88672ab2d22157d31482fb72371f390d8a34b1431f0ce1b490&txHash=0xa585fcfb5d98e24880e0c9c26275db3e6d5243639e57fa49a77f5534cfb36232&minter=0x7d88f221e9ecef9eef118e0d0e8a47f81b37e0b6&gasUsed=1037532&gasPrice=2111639700"
+    },
+    {
+      "tokenId": 1923,
+      "name": "BUILDING 1923",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1923&blockhash=0x9fc9d6bfb1678a88672ab2d22157d31482fb72371f390d8a34b1431f0ce1b490&txHash=0xa585fcfb5d98e24880e0c9c26275db3e6d5243639e57fa49a77f5534cfb36232&minter=0x7d88f221e9ecef9eef118e0d0e8a47f81b37e0b6&gasUsed=1037532&gasPrice=2111639700"
+    },
+    {
+      "tokenId": 1924,
+      "name": "BUILDING 1924",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1924&blockhash=0x9fc9d6bfb1678a88672ab2d22157d31482fb72371f390d8a34b1431f0ce1b490&txHash=0xa585fcfb5d98e24880e0c9c26275db3e6d5243639e57fa49a77f5534cfb36232&minter=0x7d88f221e9ecef9eef118e0d0e8a47f81b37e0b6&gasUsed=1037532&gasPrice=2111639700"
+    },
+    {
+      "tokenId": 1925,
+      "name": "BUILDING 1925",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1925&blockhash=0x9fc9d6bfb1678a88672ab2d22157d31482fb72371f390d8a34b1431f0ce1b490&txHash=0xa585fcfb5d98e24880e0c9c26275db3e6d5243639e57fa49a77f5534cfb36232&minter=0x7d88f221e9ecef9eef118e0d0e8a47f81b37e0b6&gasUsed=1037532&gasPrice=2111639700"
+    },
+    {
+      "tokenId": 1926,
+      "name": "BUILDING 1926",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1926&blockhash=0x9fc9d6bfb1678a88672ab2d22157d31482fb72371f390d8a34b1431f0ce1b490&txHash=0xa585fcfb5d98e24880e0c9c26275db3e6d5243639e57fa49a77f5534cfb36232&minter=0x7d88f221e9ecef9eef118e0d0e8a47f81b37e0b6&gasUsed=1037532&gasPrice=2111639700"
+    },
+    {
+      "tokenId": 1927,
+      "name": "BUILDING 1927",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1927&blockhash=0xc28788bff959bf412d33307b161ba14e83ebc71f437145e742d0092f70462073&txHash=0x9f93454de5de1b91c2154a02c29fc44404b7e9a01e0ae2871af731457a8967fa&minter=0x736576018f8afa9d5a22b43769804cd3efdb1129&gasUsed=206772&gasPrice=2083520176"
+    },
+    {
+      "tokenId": 1928,
+      "name": "BUILDING 1928",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1928&blockhash=0x192cc4206843c0f2206a7ccbac921dfcc9578ec0921088a206383fd324fc4f73&txHash=0x116099be2751b7aa29e53f327ff0d66642f5a203c5f6214c496731e10fecc28a&minter=0x36b5fed45a103ab7b6c9d4e1ed5eaa53d9efa9d9&gasUsed=240972&gasPrice=2075196058"
+    },
+    {
+      "tokenId": 1929,
+      "name": "BUILDING 1929",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1929&blockhash=0x7ea4667eda1d7038a39881cce90126a7d3e24c114eeddde453c0d8b781ff2282&txHash=0x03b63f1d5ba9d078a4f80001a4f98f3a106a618bfd7ccbf4ed8398381934ab80&minter=0x623413ce1ed560d5e3bfd99fa33e12a1c5de5b4c&gasUsed=444132&gasPrice=2068779062"
+    },
+    {
+      "tokenId": 1930,
+      "name": "BUILDING 1930",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1930&blockhash=0x7ea4667eda1d7038a39881cce90126a7d3e24c114eeddde453c0d8b781ff2282&txHash=0x03b63f1d5ba9d078a4f80001a4f98f3a106a618bfd7ccbf4ed8398381934ab80&minter=0x623413ce1ed560d5e3bfd99fa33e12a1c5de5b4c&gasUsed=444132&gasPrice=2068779062"
+    },
+    {
+      "tokenId": 1931,
+      "name": "BUILDING 1931",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1931&blockhash=0x7ea4667eda1d7038a39881cce90126a7d3e24c114eeddde453c0d8b781ff2282&txHash=0x03b63f1d5ba9d078a4f80001a4f98f3a106a618bfd7ccbf4ed8398381934ab80&minter=0x623413ce1ed560d5e3bfd99fa33e12a1c5de5b4c&gasUsed=444132&gasPrice=2068779062"
+    },
+    {
+      "tokenId": 1932,
+      "name": "BUILDING 1932",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1932&blockhash=0x7ea4667eda1d7038a39881cce90126a7d3e24c114eeddde453c0d8b781ff2282&txHash=0x03b63f1d5ba9d078a4f80001a4f98f3a106a618bfd7ccbf4ed8398381934ab80&minter=0x623413ce1ed560d5e3bfd99fa33e12a1c5de5b4c&gasUsed=444132&gasPrice=2068779062"
+    },
+    {
+      "tokenId": 1933,
+      "name": "BUILDING 1933",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1933&blockhash=0x7ea4667eda1d7038a39881cce90126a7d3e24c114eeddde453c0d8b781ff2282&txHash=0x03b63f1d5ba9d078a4f80001a4f98f3a106a618bfd7ccbf4ed8398381934ab80&minter=0x623413ce1ed560d5e3bfd99fa33e12a1c5de5b4c&gasUsed=444132&gasPrice=2068779062"
+    },
+    {
+      "tokenId": 1934,
+      "name": "BUILDING 1934",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1934&blockhash=0x1c9aaf140facc89a32d6f9c8f3b872be67a1ffd1a685bbf009a55e47fc9da76d&txHash=0xf4e0656a613cabf6e6dbf68ccee33cd27c10999ff67527300e79cd8e3cf5d2c0&minter=0x4a0962949beac41d4f7f81f96d510e0e1465b5fa&gasUsed=206772&gasPrice=2103306481"
+    },
+    {
+      "tokenId": 1935,
+      "name": "BUILDING 1935",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1935&blockhash=0x6a7223a05647c305d63d03fc6f110175f8b11fa36701a66092ee292cec13123d&txHash=0x106a2f28783c829ac12d65cbeb9bcff9a6d81035fbc547b41861c0420a9e36b3&minter=0xbe2774059d8f88f17765490afe765e8284e1c98f&gasUsed=206772&gasPrice=2139394037"
+    },
+    {
+      "tokenId": 1936,
+      "name": "BUILDING 1936",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1936&blockhash=0xbd4d216686e8565ca0af8103b88f2fff3d71c22fe7a0ae13b1b8bad36bc56721&txHash=0xf2ce545a55e15621ff7e349615e6bba93e9843742943e51ca68b26afc5fd81cf&minter=0x321ed5739440bdbd731d54a19aa20b18398d374f&gasUsed=206772&gasPrice=2122032288"
+    },
+    {
+      "tokenId": 1937,
+      "name": "BUILDING 1937",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1937&blockhash=0x397e1625932841c28868cde31d9ad7c0d95f32587dda496e1518271836b3bf8a&txHash=0x6de317492126fe8e0b80c1f26bbec54f605f1e67d93f7c2b148a843d886d78a5&minter=0xd0c877b474cd51959931a7f70d7a6c60f50cdae7&gasUsed=300310&gasPrice=2167713188"
+    },
+    {
+      "tokenId": 1938,
+      "name": "BUILDING 1938",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1938&blockhash=0x397e1625932841c28868cde31d9ad7c0d95f32587dda496e1518271836b3bf8a&txHash=0x6de317492126fe8e0b80c1f26bbec54f605f1e67d93f7c2b148a843d886d78a5&minter=0xd0c877b474cd51959931a7f70d7a6c60f50cdae7&gasUsed=300310&gasPrice=2167713188"
+    },
+    {
+      "tokenId": 1939,
+      "name": "BUILDING 1939",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1939&blockhash=0x89af8cdd1fe9523229d133c52eb48026fb796b394cbba0e5ccc42d1a6782edbc&txHash=0x9c823a15999f747ac2dac06b7114f88ff634048eee0c5b88b9966a4b957f1c4d&minter=0x623413ce1ed560d5e3bfd99fa33e12a1c5de5b4c&gasUsed=444132&gasPrice=2104313884"
+    },
+    {
+      "tokenId": 1940,
+      "name": "BUILDING 1940",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1940&blockhash=0x89af8cdd1fe9523229d133c52eb48026fb796b394cbba0e5ccc42d1a6782edbc&txHash=0x9c823a15999f747ac2dac06b7114f88ff634048eee0c5b88b9966a4b957f1c4d&minter=0x623413ce1ed560d5e3bfd99fa33e12a1c5de5b4c&gasUsed=444132&gasPrice=2104313884"
+    },
+    {
+      "tokenId": 1941,
+      "name": "BUILDING 1941",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1941&blockhash=0x89af8cdd1fe9523229d133c52eb48026fb796b394cbba0e5ccc42d1a6782edbc&txHash=0x9c823a15999f747ac2dac06b7114f88ff634048eee0c5b88b9966a4b957f1c4d&minter=0x623413ce1ed560d5e3bfd99fa33e12a1c5de5b4c&gasUsed=444132&gasPrice=2104313884"
+    },
+    {
+      "tokenId": 1942,
+      "name": "BUILDING 1942",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1942&blockhash=0x89af8cdd1fe9523229d133c52eb48026fb796b394cbba0e5ccc42d1a6782edbc&txHash=0x9c823a15999f747ac2dac06b7114f88ff634048eee0c5b88b9966a4b957f1c4d&minter=0x623413ce1ed560d5e3bfd99fa33e12a1c5de5b4c&gasUsed=444132&gasPrice=2104313884"
+    },
+    {
+      "tokenId": 1943,
+      "name": "BUILDING 1943",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1943&blockhash=0x89af8cdd1fe9523229d133c52eb48026fb796b394cbba0e5ccc42d1a6782edbc&txHash=0x9c823a15999f747ac2dac06b7114f88ff634048eee0c5b88b9966a4b957f1c4d&minter=0x623413ce1ed560d5e3bfd99fa33e12a1c5de5b4c&gasUsed=444132&gasPrice=2104313884"
+    },
+    {
+      "tokenId": 1944,
+      "name": "BUILDING 1944",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1944&blockhash=0x2c17ab5975849e47dc787c806ef7383090424eebbcbb003166591bf55c64416c&txHash=0x06dd7462e84f4a95b83a89279fa913d83306b8a6c55386a1d6dffd19fd87c5d7&minter=0x746c5a5e2169c5a1076ad110de8a5a496812b038&gasUsed=325451&gasPrice=2072612171"
+    },
+    {
+      "tokenId": 1945,
+      "name": "BUILDING 1945",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1945&blockhash=0x2c17ab5975849e47dc787c806ef7383090424eebbcbb003166591bf55c64416c&txHash=0x06dd7462e84f4a95b83a89279fa913d83306b8a6c55386a1d6dffd19fd87c5d7&minter=0x746c5a5e2169c5a1076ad110de8a5a496812b038&gasUsed=325451&gasPrice=2072612171"
+    },
+    {
+      "tokenId": 1946,
+      "name": "BUILDING 1946",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1946&blockhash=0x2c17ab5975849e47dc787c806ef7383090424eebbcbb003166591bf55c64416c&txHash=0x06dd7462e84f4a95b83a89279fa913d83306b8a6c55386a1d6dffd19fd87c5d7&minter=0x746c5a5e2169c5a1076ad110de8a5a496812b038&gasUsed=325451&gasPrice=2072612171"
+    },
+    {
+      "tokenId": 1947,
+      "name": "BUILDING 1947",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1947&blockhash=0x527328cc1d70d56558a8a29956fb515439f75da3873cfb489cbc63b91c003576&txHash=0x277b4a212f1e0cfa53f57f78df02a69f45f7a013a1126fb855dcb759783fc598&minter=0x15e1c37c31b0fc762b7ffa57c9e3d28d03666bc6&gasUsed=478332&gasPrice=2488305161"
+    },
+    {
+      "tokenId": 1948,
+      "name": "BUILDING 1948",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1948&blockhash=0x527328cc1d70d56558a8a29956fb515439f75da3873cfb489cbc63b91c003576&txHash=0x277b4a212f1e0cfa53f57f78df02a69f45f7a013a1126fb855dcb759783fc598&minter=0x15e1c37c31b0fc762b7ffa57c9e3d28d03666bc6&gasUsed=478332&gasPrice=2488305161"
+    },
+    {
+      "tokenId": 1949,
+      "name": "BUILDING 1949",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1949&blockhash=0x527328cc1d70d56558a8a29956fb515439f75da3873cfb489cbc63b91c003576&txHash=0x277b4a212f1e0cfa53f57f78df02a69f45f7a013a1126fb855dcb759783fc598&minter=0x15e1c37c31b0fc762b7ffa57c9e3d28d03666bc6&gasUsed=478332&gasPrice=2488305161"
+    },
+    {
+      "tokenId": 1950,
+      "name": "BUILDING 1950",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1950&blockhash=0x527328cc1d70d56558a8a29956fb515439f75da3873cfb489cbc63b91c003576&txHash=0x277b4a212f1e0cfa53f57f78df02a69f45f7a013a1126fb855dcb759783fc598&minter=0x15e1c37c31b0fc762b7ffa57c9e3d28d03666bc6&gasUsed=478332&gasPrice=2488305161"
+    },
+    {
+      "tokenId": 1951,
+      "name": "BUILDING 1951",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1951&blockhash=0x527328cc1d70d56558a8a29956fb515439f75da3873cfb489cbc63b91c003576&txHash=0x277b4a212f1e0cfa53f57f78df02a69f45f7a013a1126fb855dcb759783fc598&minter=0x15e1c37c31b0fc762b7ffa57c9e3d28d03666bc6&gasUsed=478332&gasPrice=2488305161"
+    },
+    {
+      "tokenId": 1952,
+      "name": "BUILDING 1952",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1952&blockhash=0xd036c6222f0f66de5e1ce1d8df51b4e7f14ab1fb67a5f15bd53319e84979d913&txHash=0x311adcca8b48103aa02d1b75d0515c6e0ba4b5faff283be99e1007fbe573e202&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=444132&gasPrice=2113765952"
+    },
+    {
+      "tokenId": 1953,
+      "name": "BUILDING 1953",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1953&blockhash=0xd036c6222f0f66de5e1ce1d8df51b4e7f14ab1fb67a5f15bd53319e84979d913&txHash=0x311adcca8b48103aa02d1b75d0515c6e0ba4b5faff283be99e1007fbe573e202&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=444132&gasPrice=2113765952"
+    },
+    {
+      "tokenId": 1954,
+      "name": "BUILDING 1954",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1954&blockhash=0xd036c6222f0f66de5e1ce1d8df51b4e7f14ab1fb67a5f15bd53319e84979d913&txHash=0x311adcca8b48103aa02d1b75d0515c6e0ba4b5faff283be99e1007fbe573e202&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=444132&gasPrice=2113765952"
+    },
+    {
+      "tokenId": 1955,
+      "name": "BUILDING 1955",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1955&blockhash=0xd036c6222f0f66de5e1ce1d8df51b4e7f14ab1fb67a5f15bd53319e84979d913&txHash=0x311adcca8b48103aa02d1b75d0515c6e0ba4b5faff283be99e1007fbe573e202&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=444132&gasPrice=2113765952"
+    },
+    {
+      "tokenId": 1956,
+      "name": "BUILDING 1956",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1956&blockhash=0xd036c6222f0f66de5e1ce1d8df51b4e7f14ab1fb67a5f15bd53319e84979d913&txHash=0x311adcca8b48103aa02d1b75d0515c6e0ba4b5faff283be99e1007fbe573e202&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=444132&gasPrice=2113765952"
+    },
+    {
+      "tokenId": 1957,
+      "name": "BUILDING 1957",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1957&blockhash=0x40d9a126729e1f1ce68980a361293e087e13b19c53ec0b088083545c629e404c&txHash=0x113a02dfdb71af54ad938694e9cdee5c8735ea776152d0ef082e0171f892e8ba&minter=0xdbdb4465314cdf3f92417e2c9af78b4d64062f00&gasUsed=206760&gasPrice=612574849"
+    },
+    {
+      "tokenId": 1958,
+      "name": "BUILDING 1958",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1958&blockhash=0x96d8a91106ebbe1b931c77a7788c979ca7bc86e9aca3723e935983e0d5468b02&txHash=0xf5795e05682588b8ea882b8d6da530f6f69ae0904a7af0ebe6a8ef0bf34061c0&minter=0xdbdb4465314cdf3f92417e2c9af78b4d64062f00&gasUsed=206760&gasPrice=610401949"
+    },
+    {
+      "tokenId": 1959,
+      "name": "BUILDING 1959",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1959&blockhash=0xecf8873f0aba40ae0c1de3d3d76e4e295dd0891f6e05d70f6456e8387e51fb70&txHash=0x902e3156c34fe249712f56d9117fab1d93f447695cff9aedad8190d48d89d733&minter=0xdbdb4465314cdf3f92417e2c9af78b4d64062f00&gasUsed=206760&gasPrice=596614112"
+    },
+    {
+      "tokenId": 1960,
+      "name": "BUILDING 1960",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1960&blockhash=0x47a4b4fa0ea43a3e7ffb24ce990502e6c22984f9829610714f027ed56be71e04&txHash=0x706c5649b5ae97bba77ec61802bc32411f1ba38ae8a25c1a0e6a402afd11850a&minter=0xc6eaa69c6f5541388122154297834b94c68dbdd1&gasUsed=240972&gasPrice=2147457455"
+    },
+    {
+      "tokenId": 1961,
+      "name": "BUILDING 1961",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1961&blockhash=0x6d4da889decd979c18408b0a3d1e98ff5f1bebe0b9105518969f6900a2ed10f0&txHash=0x4360045b2f4cd5de131d25c5e9b901e96c11c43bea623c13c30e92fa2ae2d4eb&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=740831&gasPrice=2163677897"
+    },
+    {
+      "tokenId": 1962,
+      "name": "BUILDING 1962",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1962&blockhash=0x6d4da889decd979c18408b0a3d1e98ff5f1bebe0b9105518969f6900a2ed10f0&txHash=0x4360045b2f4cd5de131d25c5e9b901e96c11c43bea623c13c30e92fa2ae2d4eb&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=740831&gasPrice=2163677897"
+    },
+    {
+      "tokenId": 1963,
+      "name": "BUILDING 1963",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1963&blockhash=0x6d4da889decd979c18408b0a3d1e98ff5f1bebe0b9105518969f6900a2ed10f0&txHash=0x4360045b2f4cd5de131d25c5e9b901e96c11c43bea623c13c30e92fa2ae2d4eb&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=740831&gasPrice=2163677897"
+    },
+    {
+      "tokenId": 1964,
+      "name": "BUILDING 1964",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1964&blockhash=0x6d4da889decd979c18408b0a3d1e98ff5f1bebe0b9105518969f6900a2ed10f0&txHash=0x4360045b2f4cd5de131d25c5e9b901e96c11c43bea623c13c30e92fa2ae2d4eb&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=740831&gasPrice=2163677897"
+    },
+    {
+      "tokenId": 1965,
+      "name": "BUILDING 1965",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1965&blockhash=0x6d4da889decd979c18408b0a3d1e98ff5f1bebe0b9105518969f6900a2ed10f0&txHash=0x4360045b2f4cd5de131d25c5e9b901e96c11c43bea623c13c30e92fa2ae2d4eb&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=740831&gasPrice=2163677897"
+    },
+    {
+      "tokenId": 1966,
+      "name": "BUILDING 1966",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1966&blockhash=0x6d4da889decd979c18408b0a3d1e98ff5f1bebe0b9105518969f6900a2ed10f0&txHash=0x4360045b2f4cd5de131d25c5e9b901e96c11c43bea623c13c30e92fa2ae2d4eb&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=740831&gasPrice=2163677897"
+    },
+    {
+      "tokenId": 1967,
+      "name": "BUILDING 1967",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1967&blockhash=0x6d4da889decd979c18408b0a3d1e98ff5f1bebe0b9105518969f6900a2ed10f0&txHash=0x4360045b2f4cd5de131d25c5e9b901e96c11c43bea623c13c30e92fa2ae2d4eb&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=740831&gasPrice=2163677897"
+    },
+    {
+      "tokenId": 1968,
+      "name": "BUILDING 1968",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1968&blockhash=0x6d4da889decd979c18408b0a3d1e98ff5f1bebe0b9105518969f6900a2ed10f0&txHash=0x4360045b2f4cd5de131d25c5e9b901e96c11c43bea623c13c30e92fa2ae2d4eb&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=740831&gasPrice=2163677897"
+    },
+    {
+      "tokenId": 1969,
+      "name": "BUILDING 1969",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1969&blockhash=0x6d4da889decd979c18408b0a3d1e98ff5f1bebe0b9105518969f6900a2ed10f0&txHash=0x4360045b2f4cd5de131d25c5e9b901e96c11c43bea623c13c30e92fa2ae2d4eb&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=740831&gasPrice=2163677897"
+    },
+    {
+      "tokenId": 1970,
+      "name": "BUILDING 1970",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1970&blockhash=0x6d4da889decd979c18408b0a3d1e98ff5f1bebe0b9105518969f6900a2ed10f0&txHash=0x4360045b2f4cd5de131d25c5e9b901e96c11c43bea623c13c30e92fa2ae2d4eb&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=740831&gasPrice=2163677897"
+    },
+    {
+      "tokenId": 1971,
+      "name": "BUILDING 1971",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1971&blockhash=0x3a3207d1991d7f2bad6ab8292ebd74c00baa4a21011cd64451c22d27a997cba5&txHash=0x71808fba12011320970ce6db47733a4e9f6cd46c07292d5ced8bc3eff093919f&minter=0xf2b4a725e943b54cdabada2c9ae2727874a49eaa&gasUsed=240972&gasPrice=2205868497"
+    },
+    {
+      "tokenId": 1972,
+      "name": "BUILDING 1972",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1972&blockhash=0x8c888a7ce9ace71aabf662fd39d5cc3968e5d6eb8027a76e98d5db766fc70bbe&txHash=0x36f4fc80897be8a9a77c37c8070c69ab55452ec9423428519513a2a44f173654&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=444132&gasPrice=2333317199"
+    },
+    {
+      "tokenId": 1973,
+      "name": "BUILDING 1973",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1973&blockhash=0x8c888a7ce9ace71aabf662fd39d5cc3968e5d6eb8027a76e98d5db766fc70bbe&txHash=0x36f4fc80897be8a9a77c37c8070c69ab55452ec9423428519513a2a44f173654&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=444132&gasPrice=2333317199"
+    },
+    {
+      "tokenId": 1974,
+      "name": "BUILDING 1974",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1974&blockhash=0x8c888a7ce9ace71aabf662fd39d5cc3968e5d6eb8027a76e98d5db766fc70bbe&txHash=0x36f4fc80897be8a9a77c37c8070c69ab55452ec9423428519513a2a44f173654&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=444132&gasPrice=2333317199"
+    },
+    {
+      "tokenId": 1975,
+      "name": "BUILDING 1975",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1975&blockhash=0x8c888a7ce9ace71aabf662fd39d5cc3968e5d6eb8027a76e98d5db766fc70bbe&txHash=0x36f4fc80897be8a9a77c37c8070c69ab55452ec9423428519513a2a44f173654&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=444132&gasPrice=2333317199"
+    },
+    {
+      "tokenId": 1976,
+      "name": "BUILDING 1976",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1976&blockhash=0x8c888a7ce9ace71aabf662fd39d5cc3968e5d6eb8027a76e98d5db766fc70bbe&txHash=0x36f4fc80897be8a9a77c37c8070c69ab55452ec9423428519513a2a44f173654&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=444132&gasPrice=2333317199"
+    },
+    {
+      "tokenId": 1977,
+      "name": "BUILDING 1977",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1977&blockhash=0xba713ea909d68f0f3989665d73edb652f922e95a4a369fb3c81e67084667edd1&txHash=0x258e5e91aec134129d2acc51c4cb17f02fd6cde870f35cc2370a6d212db2d133&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=444132&gasPrice=2361339279"
+    },
+    {
+      "tokenId": 1978,
+      "name": "BUILDING 1978",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1978&blockhash=0xba713ea909d68f0f3989665d73edb652f922e95a4a369fb3c81e67084667edd1&txHash=0x258e5e91aec134129d2acc51c4cb17f02fd6cde870f35cc2370a6d212db2d133&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=444132&gasPrice=2361339279"
+    },
+    {
+      "tokenId": 1979,
+      "name": "BUILDING 1979",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1979&blockhash=0xba713ea909d68f0f3989665d73edb652f922e95a4a369fb3c81e67084667edd1&txHash=0x258e5e91aec134129d2acc51c4cb17f02fd6cde870f35cc2370a6d212db2d133&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=444132&gasPrice=2361339279"
+    },
+    {
+      "tokenId": 1980,
+      "name": "BUILDING 1980",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1980&blockhash=0xba713ea909d68f0f3989665d73edb652f922e95a4a369fb3c81e67084667edd1&txHash=0x258e5e91aec134129d2acc51c4cb17f02fd6cde870f35cc2370a6d212db2d133&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=444132&gasPrice=2361339279"
+    },
+    {
+      "tokenId": 1981,
+      "name": "BUILDING 1981",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1981&blockhash=0xba713ea909d68f0f3989665d73edb652f922e95a4a369fb3c81e67084667edd1&txHash=0x258e5e91aec134129d2acc51c4cb17f02fd6cde870f35cc2370a6d212db2d133&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=444132&gasPrice=2361339279"
+    },
+    {
+      "tokenId": 1982,
+      "name": "BUILDING 1982",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1982&blockhash=0x9f3dd9e37632654ac4b9fd1938f5724fbb9fd1aa173dc98ec8c91f7a5b3267ad&txHash=0x1caeadb8b98a522623d15244799e2f6772219018f71d99e727d6cd861def6e2d&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=1274895&gasPrice=2385445353"
+    },
+    {
+      "tokenId": 1983,
+      "name": "BUILDING 1983",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1983&blockhash=0x9f3dd9e37632654ac4b9fd1938f5724fbb9fd1aa173dc98ec8c91f7a5b3267ad&txHash=0x1caeadb8b98a522623d15244799e2f6772219018f71d99e727d6cd861def6e2d&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=1274895&gasPrice=2385445353"
+    },
+    {
+      "tokenId": 1984,
+      "name": "BUILDING 1984",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1984&blockhash=0x9f3dd9e37632654ac4b9fd1938f5724fbb9fd1aa173dc98ec8c91f7a5b3267ad&txHash=0x1caeadb8b98a522623d15244799e2f6772219018f71d99e727d6cd861def6e2d&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=1274895&gasPrice=2385445353"
+    },
+    {
+      "tokenId": 1985,
+      "name": "BUILDING 1985",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1985&blockhash=0x9f3dd9e37632654ac4b9fd1938f5724fbb9fd1aa173dc98ec8c91f7a5b3267ad&txHash=0x1caeadb8b98a522623d15244799e2f6772219018f71d99e727d6cd861def6e2d&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=1274895&gasPrice=2385445353"
+    },
+    {
+      "tokenId": 1986,
+      "name": "BUILDING 1986",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1986&blockhash=0x9f3dd9e37632654ac4b9fd1938f5724fbb9fd1aa173dc98ec8c91f7a5b3267ad&txHash=0x1caeadb8b98a522623d15244799e2f6772219018f71d99e727d6cd861def6e2d&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=1274895&gasPrice=2385445353"
+    },
+    {
+      "tokenId": 1987,
+      "name": "BUILDING 1987",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1987&blockhash=0x9f3dd9e37632654ac4b9fd1938f5724fbb9fd1aa173dc98ec8c91f7a5b3267ad&txHash=0x1caeadb8b98a522623d15244799e2f6772219018f71d99e727d6cd861def6e2d&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=1274895&gasPrice=2385445353"
+    },
+    {
+      "tokenId": 1988,
+      "name": "BUILDING 1988",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1988&blockhash=0x9f3dd9e37632654ac4b9fd1938f5724fbb9fd1aa173dc98ec8c91f7a5b3267ad&txHash=0x1caeadb8b98a522623d15244799e2f6772219018f71d99e727d6cd861def6e2d&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=1274895&gasPrice=2385445353"
+    },
+    {
+      "tokenId": 1989,
+      "name": "BUILDING 1989",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1989&blockhash=0x9f3dd9e37632654ac4b9fd1938f5724fbb9fd1aa173dc98ec8c91f7a5b3267ad&txHash=0x1caeadb8b98a522623d15244799e2f6772219018f71d99e727d6cd861def6e2d&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=1274895&gasPrice=2385445353"
+    },
+    {
+      "tokenId": 1990,
+      "name": "BUILDING 1990",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1990&blockhash=0x9f3dd9e37632654ac4b9fd1938f5724fbb9fd1aa173dc98ec8c91f7a5b3267ad&txHash=0x1caeadb8b98a522623d15244799e2f6772219018f71d99e727d6cd861def6e2d&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=1274895&gasPrice=2385445353"
+    },
+    {
+      "tokenId": 1991,
+      "name": "BUILDING 1991",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1991&blockhash=0x9f3dd9e37632654ac4b9fd1938f5724fbb9fd1aa173dc98ec8c91f7a5b3267ad&txHash=0x1caeadb8b98a522623d15244799e2f6772219018f71d99e727d6cd861def6e2d&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=1274895&gasPrice=2385445353"
+    },
+    {
+      "tokenId": 1992,
+      "name": "BUILDING 1992",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1992&blockhash=0x9f3dd9e37632654ac4b9fd1938f5724fbb9fd1aa173dc98ec8c91f7a5b3267ad&txHash=0x1caeadb8b98a522623d15244799e2f6772219018f71d99e727d6cd861def6e2d&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=1274895&gasPrice=2385445353"
+    },
+    {
+      "tokenId": 1993,
+      "name": "BUILDING 1993",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1993&blockhash=0x9f3dd9e37632654ac4b9fd1938f5724fbb9fd1aa173dc98ec8c91f7a5b3267ad&txHash=0x1caeadb8b98a522623d15244799e2f6772219018f71d99e727d6cd861def6e2d&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=1274895&gasPrice=2385445353"
+    },
+    {
+      "tokenId": 1994,
+      "name": "BUILDING 1994",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1994&blockhash=0x9f3dd9e37632654ac4b9fd1938f5724fbb9fd1aa173dc98ec8c91f7a5b3267ad&txHash=0x1caeadb8b98a522623d15244799e2f6772219018f71d99e727d6cd861def6e2d&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=1274895&gasPrice=2385445353"
+    },
+    {
+      "tokenId": 1995,
+      "name": "BUILDING 1995",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1995&blockhash=0x9f3dd9e37632654ac4b9fd1938f5724fbb9fd1aa173dc98ec8c91f7a5b3267ad&txHash=0x1caeadb8b98a522623d15244799e2f6772219018f71d99e727d6cd861def6e2d&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=1274895&gasPrice=2385445353"
+    },
+    {
+      "tokenId": 1996,
+      "name": "BUILDING 1996",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1996&blockhash=0x9f3dd9e37632654ac4b9fd1938f5724fbb9fd1aa173dc98ec8c91f7a5b3267ad&txHash=0x1caeadb8b98a522623d15244799e2f6772219018f71d99e727d6cd861def6e2d&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=1274895&gasPrice=2385445353"
+    },
+    {
+      "tokenId": 1997,
+      "name": "BUILDING 1997",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1997&blockhash=0x9f3dd9e37632654ac4b9fd1938f5724fbb9fd1aa173dc98ec8c91f7a5b3267ad&txHash=0x1caeadb8b98a522623d15244799e2f6772219018f71d99e727d6cd861def6e2d&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=1274895&gasPrice=2385445353"
+    },
+    {
+      "tokenId": 1998,
+      "name": "BUILDING 1998",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1998&blockhash=0x9f3dd9e37632654ac4b9fd1938f5724fbb9fd1aa173dc98ec8c91f7a5b3267ad&txHash=0x1caeadb8b98a522623d15244799e2f6772219018f71d99e727d6cd861def6e2d&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=1274895&gasPrice=2385445353"
+    },
+    {
+      "tokenId": 1999,
+      "name": "BUILDING 1999",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=1999&blockhash=0x9f3dd9e37632654ac4b9fd1938f5724fbb9fd1aa173dc98ec8c91f7a5b3267ad&txHash=0x1caeadb8b98a522623d15244799e2f6772219018f71d99e727d6cd861def6e2d&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=1274895&gasPrice=2385445353"
+    },
+    {
+      "tokenId": 2000,
+      "name": "BUILDING 2000",
+      "animation_url": "ipfs://QmZhgicpUwfCdSfjB6pF3scAzNaQyxwTDPwGDjXXvK8ZX7/index.html?tokenId=2000&blockhash=0x9f3dd9e37632654ac4b9fd1938f5724fbb9fd1aa173dc98ec8c91f7a5b3267ad&txHash=0x1caeadb8b98a522623d15244799e2f6772219018f71d99e727d6cd861def6e2d&minter=0x481775a1a694c31da312cd1b166e353151fe0579&gasUsed=1274895&gasPrice=2385445353"
     }
   ]
 }

@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Neighborhood</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            height: 100%;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        canvas {
+            display: block;
+            max-width: 100vw;
+            max-height: 100vh;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        const WINDOW_COUNT = 1000;
+
+        // ---- print-ready grid presets ----
+        // Each preset targets an EXACT final physical print size (5:4). Windows
+        // keep their 4:5 aspect (cellH = 1.25 * cellW) and butt edge-to-edge with
+        // no gaps; only an outer border separates the grid from the paper edge.
+        // The window size flexes slightly per preset so the largest possible grid
+        // fits inside the target while every side keeps at least MIN_BORDER_IN.
+        const PRINT_DPI = 300;
+        const MIN_BORDER_IN = 0.75; // minimum outer border per side, inches
+        const WIN_ASPECT = 1.25;    // window height / width (4:5 portrait)
+
+        // Each preset is a target final physical print size, in inches (5:4).
+        const PRESETS = [
+            { cols: 6, rows: 4, finalWIn: 10, finalHIn: 8 },
+            { cols: 11, rows: 7, finalWIn: 20, finalHIn: 16 },
+            { cols: 17, rows: 11, finalWIn: 30, finalHIn: 24 },
+        ];
+
+        // Derive the in-inch geometry for a preset: the largest cell (keeping 4:5)
+        // that fits the available area after reserving MIN_BORDER_IN on all sides,
+        // then the actual (>= min) borders that center the grid in the target.
+        function presetGeom(p) {
+            const availableWIn = p.finalWIn - 2 * MIN_BORDER_IN;
+            const availableHIn = p.finalHIn - 2 * MIN_BORDER_IN;
+            const cellWIn = Math.min(availableWIn / p.cols, (availableHIn / p.rows) / WIN_ASPECT);
+            const cellHIn = cellWIn * WIN_ASPECT;
+            const borderXIn = (p.finalWIn - p.cols * cellWIn) / 2;
+            const borderYIn = (p.finalHIn - p.rows * cellHIn) / 2;
+            return { cellWIn, cellHIn, borderXIn, borderYIn };
+        }
+
+        // Choose a preset via ?size=0|1|2 (defaults to the first).
+        const sizeParam = parseInt(new URLSearchParams(location.search).get("size"), 10);
+        const sizeIdx = Number.isFinite(sizeParam) ? Math.min(Math.max(sizeParam, 0), PRESETS.length - 1) : 0;
+        const PRESET = PRESETS[sizeIdx];
+
+        const COLS = PRESET.cols;
+        const ROWS = PRESET.rows;
+
+        // Native print-resolution pixel dimensions (inches x DPI).
+        const GEOM = presetGeom(PRESET);
+
+        // Log the full sizing spec for the selected preset. Resolution math is
+        // border-free: required asset resolution is driven only by the printed
+        // window grid at PRINT_DPI; the border is solid black fill (no detail),
+        // so it never factors into source-image resolution requirements.
+        const r = (n) => Math.round(n * 1000) / 1000;
+        const gridWIn = COLS * GEOM.cellWIn; // printed window-grid area, inches
+        const gridHIn = ROWS * GEOM.cellHIn;
+        console.log("size:", sizeIdx);
+        console.log("Grid:", `${COLS}×${ROWS}`);
+        console.log("Final:", `${PRESET.finalWIn}″ × ${PRESET.finalHIn}″`);
+        console.log("Window:", `${r(GEOM.cellWIn)}″ × ${r(GEOM.cellHIn)}″`);
+        console.log("Border:", `${r(GEOM.borderXIn)}″ × ${r(GEOM.borderYIn)}″`);
+        console.log("Grid printed:", `${r(gridWIn)}″ × ${r(gridHIn)}″`);
+        // Required source resolution each window image needs to print crisp at
+        // PRINT_DPI (border-free: cell inches × DPI). ceil = true minimum.
+        const minWindowPx = `${Math.ceil(GEOM.cellWIn * PRINT_DPI)}×${Math.ceil(GEOM.cellHIn * PRINT_DPI)}`;
+        console.log("Min window px:", minWindowPx);
+        // Printed window-grid resolution (border-free) and full export file size.
+        console.log("Grid px:", `${Math.round(gridWIn * PRINT_DPI)}×${Math.round(gridHIn * PRINT_DPI)}`);
+        console.log("Canvas px (full, incl. border):", `${Math.round(PRESET.finalWIn * PRINT_DPI)}×${Math.round(PRESET.finalHIn * PRINT_DPI)}`);
+
+        const CELL_W = GEOM.cellWIn * PRINT_DPI;
+        const CELL_H = GEOM.cellHIn * PRINT_DPI;
+        const BORDER_X = GEOM.borderXIn * PRINT_DPI;
+        const BORDER_Y = GEOM.borderYIn * PRINT_DPI;
+        const PRINT_W = PRESET.finalWIn * PRINT_DPI; // full canvas, print px (exact target)
+        const PRINT_H = PRESET.finalHIn * PRINT_DPI;
+
+        const LIVE_MAX_H = 4000;
+
+        // Live preview may downscale the whole canvas (grid + border) uniformly;
+        // print/export keeps native resolution. Geometry stays float so the 5:4
+        // ratio is exact; only the integer canvas pixel dims are rounded.
+        const hasMouse = !!(window.matchMedia && window.matchMedia("(any-pointer: fine)").matches);
+        const liveScale = hasMouse ? 1 : Math.min(1, LIVE_MAX_H / PRINT_H);
+        const cellW = CELL_W * liveScale;
+        const cellH = CELL_H * liveScale;
+        const borderX = BORDER_X * liveScale;
+        const borderY = BORDER_Y * liveScale;
+        const W = COLS * cellW + 2 * borderX;
+        const H = ROWS * cellH + 2 * borderY;
+
+
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.round(W);
+        canvas.height = Math.round(H);
+        document.body.appendChild(canvas);
+        const ctx = canvas.getContext("2d");
+
+        const IPFS_GATEWAYS = [
+            "https://ipfs.io",
+            "https://dweb.link",
+            "https://ipfs.filebase.io",
+            "https://ipfs.transientusercontent.xyz",
+        ];
+
+        function loadFrom(src) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = () => resolve(img);
+                img.onerror = () => reject(new Error("failed to load " + src));
+                img.src = src;
+            }).then((img) =>
+                img
+                    .decode()
+                    .then(() => (window.createImageBitmap ? createImageBitmap(img) : img))
+                    .catch(() => img)
+            );
+        }
+
+        function loadImage(src) {
+            const path = src.slice(src.indexOf("/ipfs/"));
+            let attempt = 0;
+            const tryNext = () =>
+                loadFrom(IPFS_GATEWAYS[attempt] + path).catch((err) => {
+                    if (++attempt < IPFS_GATEWAYS.length) return tryNext();
+                    throw err;
+                });
+            return tryNext();
+        }
+
+        const FPS = 60;
+        const TOTAL_FRAMES = 2 * FPS;
+        const POP_FRAMES = 36;
+
+        function easeOutBack(t) {
+            const c1 = 1.70158;
+            const c3 = c1 + 1;
+            return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
+        }
+
+        const cells = COLS * ROWS;
+
+        // ---- seeded PRNG for window selection ----
+        // Pass ?seed=<any string> to make the window selection reproducible: the
+        // same seed always picks the same windows. With no seed, a random one is
+        // generated so each load differs. cyrb128 hashes the string into 4
+        // 32-bit values; mulberry32 turns one into a [0,1) stream.
+        function cyrb128(str) {
+            let h1 = 1779033703, h2 = 3144134277, h3 = 1013904242, h4 = 2773480762;
+            for (let i = 0; i < str.length; i++) {
+                const k = str.charCodeAt(i);
+                h1 = h2 ^ Math.imul(h1 ^ k, 597399067);
+                h2 = h3 ^ Math.imul(h2 ^ k, 2869860233);
+                h3 = h4 ^ Math.imul(h3 ^ k, 951274213);
+                h4 = h1 ^ Math.imul(h4 ^ k, 2716044179);
+            }
+            h1 = Math.imul(h3 ^ (h1 >>> 18), 597399067);
+            h2 = Math.imul(h4 ^ (h2 >>> 22), 2869860233);
+            h3 = Math.imul(h1 ^ (h3 >>> 17), 951274213);
+            h4 = Math.imul(h2 ^ (h4 >>> 19), 2716044179);
+            return (h1 ^ h2 ^ h3 ^ h4) >>> 0;
+        }
+        function mulberry32(a) {
+            return function () {
+                a |= 0; a = (a + 0x6D2B79F5) | 0;
+                let t = Math.imul(a ^ (a >>> 15), 1 | a);
+                t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+                return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+            };
+        }
+
+        const seedParam = new URLSearchParams(location.search).get("seed");
+        const seed = seedParam != null ? seedParam : String(Math.floor(Math.random() * 1e9));
+        const rng = mulberry32(cyrb128(seed));
+
+        // Randomly select `cells` unique window ids (no repeats) from 1..WINDOW_COUNT.
+        const picks = [];
+        const seen = new Set();
+        while (picks.length < cells) {
+            const n = 1 + Math.floor(rng() * WINDOW_COUNT);
+            if (seen.has(n)) continue;
+            seen.add(n);
+            picks.push(n);
+        }
+
+        function det(i, k) {
+            const x = Math.sin((i + 1) * 127.1 + (k + 1) * 311.7) * 43758.5453;
+            return x - Math.floor(x);
+        }
+
+        const revealOrder = picks.map((_, i) => i).sort((a, b) => det(a, 99) - det(b, 99));
+
+        const floats = picks.map((_, i) => ({
+            ax: 0.01 + 0.012 * det(i, 0),
+            ay: 0.014 + 0.016 * det(i, 1),
+            sx: 0.008 + 0.012 * det(i, 2),
+            sy: 0.008 + 0.012 * det(i, 3),
+            px: 2 * Math.PI * det(i, 4),
+            py: 2 * Math.PI * det(i, 5),
+            as: 0.02 + 0.03 * det(i, 6),
+            ss: 0.006 + 0.01 * det(i, 7),
+            ps: 2 * Math.PI * det(i, 8),
+        }));
+
+            Promise.all(picks.map((n) => loadImage(`https://ipfs.io/ipfs/Qmb195Z9XLptpKy3oyUxeLupCQE9eDUrXkiz8xQuSK1GwV/window-${n}.webp`))).then((images) => {
+                const count = COLS * ROWS;
+
+                const span = TOTAL_FRAMES - POP_FRAMES;
+                const startFrame = new Array(count);
+                revealOrder.forEach((cell, order) => {
+                    startFrame[cell] = count > 1 ? Math.round((order / (count - 1)) * span) : 0;
+                });
+
+                // Paint the backdrop: white outer border, black behind the window
+                // grid (so popping/empty cells read against black, border stays white).
+                function paintBg() {
+                    ctx.fillStyle = "#fff";
+                    ctx.fillRect(0, 0, W, H);
+                    ctx.fillStyle = "#000";
+                    ctx.fillRect(borderX, borderY, COLS * cellW, ROWS * cellH);
+                }
+
+                function render(frame) {
+                    paintBg();
+
+                    for (let gy = 0; gy < ROWS; gy++) {
+                        for (let gx = 0; gx < COLS; gx++) {
+                            const i = gy * COLS + gx;
+                            const t = (frame - startFrame[i]) / POP_FRAMES;
+                            if (t < 0) continue;
+
+                            const scale = t >= 1 ? 1 : easeOutBack(t);
+                            if (scale <= 0) continue;
+
+                            const x = borderX + gx * cellW;
+                            const y = borderY + gy * cellH;
+                            const cx = x + cellW / 2;
+                            const cy = y + cellH / 2;
+                            ctx.drawImage(
+                                images[i],
+                                cx - (cellW * scale) / 2,
+                                cy - (cellH * scale) / 2,
+                                cellW * scale,
+                                cellH * scale
+                            );
+                        }
+                    }
+                }
+
+                function renderFloat(f, k) {
+                    paintBg();
+
+                    for (let gy = 0; gy < ROWS; gy++) {
+                        for (let gx = 0; gx < COLS; gx++) {
+                            const i = gy * COLS + gx;
+                            const fl = floats[i];
+                            const x = borderX + gx * cellW;
+                            const y = borderY + gy * cellH;
+                            const offX = fl.ax * cellW * Math.sin(f * fl.sx + fl.px) * k;
+                            const offY = fl.ay * cellH * Math.sin(f * fl.sy + fl.py) * k;
+                            const swell = 1 + fl.as * Math.sin(f * fl.ss + fl.ps) * k;
+                            const w = cellW * swell;
+                            const h = cellH * swell;
+                            ctx.drawImage(
+                                images[i],
+                                x + offX + (cellW - w) / 2,
+                                y + offY + (cellH - h) / 2,
+                                w,
+                                h
+                            );
+                        }
+                    }
+                }
+
+                function scaleAtFrame(rf, i) {
+                    const t = (rf - startFrame[i]) / POP_FRAMES;
+                    if (t < 0) return 0;
+                    return t >= 1 ? 1 : easeOutBack(t);
+                }
+
+                const SNAP_FRAMES = 24;
+                let snapScales = null;
+                function renderSnap(t) {
+                    paintBg();
+
+                    const eased = t >= 1 ? 1 : easeOutBack(t);
+                    for (let gy = 0; gy < ROWS; gy++) {
+                        for (let gx = 0; gx < COLS; gx++) {
+                            const i = gy * COLS + gx;
+                            const scale = snapScales[i] + (1 - snapScales[i]) * eased;
+                            if (scale <= 0) continue;
+                            const x = borderX + gx * cellW;
+                            const y = borderY + gy * cellH;
+                            const cx = x + cellW / 2;
+                            const cy = y + cellH / 2;
+                            ctx.drawImage(
+                                images[i],
+                                cx - (cellW * scale) / 2,
+                                cy - (cellH * scale) / 2,
+                                cellW * scale,
+                                cellH * scale
+                            );
+                        }
+                    }
+                }
+
+                let state = "reveal";
+                let frame = 0;
+                let floatFrame = 0;
+                let calmStartK = 1;
+                const PAUSE_FRAMES = 30;
+                const RAMP_FRAMES = 60;
+
+                const ZOOM_FRAMES = 72;
+                let baseState = "settled";
+
+                function easeInOutCubic(t) {
+                    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+                }
+
+                function renderBase() {
+                    if (baseState === "alive") {
+                        renderFloat(floatFrame, Math.min(floatFrame / RAMP_FRAMES, 1));
+                        floatFrame++;
+                    } else {
+                        render(TOTAL_FRAMES);
+                    }
+                }
+
+                const ZOOM_LEVEL = 0.5;
+                const GRID_VIEW = { x: W / 2, y: H / 2, vw: W };
+                let cam = { ...GRID_VIEW };
+                let zoomTarget = null;
+                let zoomFrom = null;
+
+                let vel = { x: 0, y: 0 };
+                const FRICTION = 0.9;
+                const MIN_VEL = 0.2;
+
+                function renderView(c) {
+                    const s = W / c.vw;
+                    ctx.setTransform(s, 0, 0, s, W / 2 - c.x * s, H / 2 - c.y * s);
+                    renderBase();
+                    ctx.setTransform(1, 0, 0, 1, 0, 0);
+                }
+
+                function renderZoomLeg(from, to, u) {
+                    const e = easeInOutCubic(u);
+                    cam = {
+                        x: from.x + (to.x - from.x) * e,
+                        y: from.y + (to.y - from.y) * e,
+                        vw: from.vw + (to.vw - from.vw) * e,
+                    };
+                    renderView(cam);
+                }
+
+                function clampAxis(v, half, max) {
+                    if (half * 2 >= max) return max / 2;
+                    return Math.min(Math.max(v, half), max - half);
+                }
+                function clampCam() {
+                    const vh = cam.vw * (H / W);
+                    cam.x = clampAxis(cam.x, cam.vw / 2, W);
+                    cam.y = clampAxis(cam.y, vh / 2, H);
+                }
+
+                function tick() {
+                    if (state === "reveal") {
+                        render(frame);
+                        if (frame >= TOTAL_FRAMES) {
+                            state = "settled";
+                            running = false;
+                            return;
+                        }
+                        frame++;
+                    } else if (state === "out") {
+                        render(TOTAL_FRAMES - frame);
+                        if (frame >= TOTAL_FRAMES) {
+                            state = "pause";
+                            frame = 0;
+                        } else {
+                            frame++;
+                        }
+                    } else if (state === "pause") {
+                        render(-1);
+                        if (frame >= PAUSE_FRAMES) {
+                            state = "in";
+                            frame = 0;
+                        } else {
+                            frame++;
+                        }
+                    } else if (state === "in") {
+                        render(frame);
+                        if (frame >= TOTAL_FRAMES) {
+                            state = "hold";
+                            frame = 0;
+                        } else {
+                            frame++;
+                        }
+                    } else if (state === "hold") {
+                        render(TOTAL_FRAMES);
+                        if (frame >= PAUSE_FRAMES) {
+                            state = "out";
+                            frame = 0;
+                        } else {
+                            frame++;
+                        }
+                    } else if (state === "snap") {
+                        renderSnap(frame / SNAP_FRAMES);
+                        if (frame >= SNAP_FRAMES) {
+                            state = "alive";
+                            floatFrame = 0;
+                        } else {
+                            frame++;
+                        }
+                    } else if (state === "alive") {
+                        const k = Math.min(floatFrame / RAMP_FRAMES, 1);
+                        renderFloat(floatFrame, k);
+                        floatFrame++;
+                    } else if (state === "calm") {
+                        const k = calmStartK * Math.max(1 - frame / RAMP_FRAMES, 0);
+                        renderFloat(floatFrame, k);
+                        floatFrame++;
+                        if (frame >= RAMP_FRAMES) {
+                            render(TOTAL_FRAMES);
+                            state = "settled";
+                            running = false;
+                            return;
+                        }
+                        frame++;
+                    } else if (state === "zoomin") {
+                        renderZoomLeg(zoomFrom, zoomTarget, frame / ZOOM_FRAMES);
+                        if (frame >= ZOOM_FRAMES) {
+                            state = "zoomed";
+                        } else {
+                            frame++;
+                        }
+                    } else if (state === "zoomed") {
+                        if (!drag && (Math.abs(vel.x) > MIN_VEL || Math.abs(vel.y) > MIN_VEL)) {
+                            const wantX = cam.x + vel.x;
+                            const wantY = cam.y + vel.y;
+                            cam.x = wantX;
+                            cam.y = wantY;
+                            clampCam();
+                            if (cam.x !== wantX) vel.x = 0;
+                            if (cam.y !== wantY) vel.y = 0;
+                            vel.x *= FRICTION;
+                            vel.y *= FRICTION;
+                        } else if (!drag) {
+                            vel.x = 0;
+                            vel.y = 0;
+                        }
+                        renderView(cam);
+                    } else if (state === "zoomout") {
+                        renderZoomLeg(zoomFrom, GRID_VIEW, frame / ZOOM_FRAMES);
+                        if (frame >= ZOOM_FRAMES) {
+                            state = baseState;
+                            if (state === "settled") {
+                                render(TOTAL_FRAMES);
+                                running = false;
+                                return;
+                            }
+                        } else {
+                            frame++;
+                        }
+                    }
+                }
+
+                const targetInterval = 1000 / FPS;
+                const FRAME_EPSILON = 5;
+                let running = false;
+                let lastTargetFrameTime = 0;
+
+                function loop(now) {
+                    if (!running) return;
+                    requestAnimationFrame(loop);
+                    if (now - lastTargetFrameTime >= targetInterval - FRAME_EPSILON) {
+                        lastTargetFrameTime = Math.max(lastTargetFrameTime + targetInterval, now);
+                        tick();
+                    }
+                }
+                function startLoop() {
+                    if (running) return;
+                    running = true;
+                    lastTargetFrameTime = 0;
+                    requestAnimationFrame(loop);
+                }
+                startLoop();
+
+                const LONG_PRESS_MS = 500;
+                const MOVE_TOLERANCE = 10;
+                let pressTimer = null;
+                let longPressFired = false;
+                let pressPos = null;
+
+                function cellAt(clientX, clientY) {
+                    const rect = canvas.getBoundingClientRect();
+                    const px = (clientX - rect.left) * (W / rect.width);
+                    const py = (clientY - rect.top) * (H / rect.height);
+                    const gx = Math.floor((px - borderX) / cellW);
+                    const gy = Math.floor((py - borderY) / cellH);
+                    if (gx < 0 || gx >= COLS || gy < 0 || gy >= ROWS) return null;
+                    return { x: borderX + gx * cellW, y: borderY + gy * cellH };
+                }
+
+                function cancelPress() {
+                    clearTimeout(pressTimer);
+                    pressPos = null;
+                }
+
+                let drag = null;
+                let suppressClick = false;
+                let lastMoveT = 0;
+                let lastPointerType = "mouse";
+
+                function endDrag() {
+                    if (drag) {
+                        if (drag.moved) suppressClick = true;
+                        if (performance.now() - lastMoveT > 80) {
+                            vel.x = 0;
+                            vel.y = 0;
+                        }
+                    }
+                    drag = null;
+                }
+
+                canvas.addEventListener("pointerdown", (e) => {
+                    longPressFired = false;
+                    lastPointerType = e.pointerType || "mouse";
+                    if (e.button !== 0) return;
+                    if (state === "zoomed") {
+                        vel.x = 0;
+                        vel.y = 0;
+                        drag = { x: e.clientX, y: e.clientY, camX: cam.x, camY: cam.y, moved: false };
+                        lastMoveT = performance.now();
+                        canvas.setPointerCapture(e.pointerId);
+                        return;
+                    }
+                    if (state !== "settled" && state !== "alive") return;
+                    const cell = cellAt(e.clientX, e.clientY);
+                    if (!cell) return;
+                    pressPos = { x: e.clientX, y: e.clientY };
+                    clearTimeout(pressTimer);
+                    pressTimer = setTimeout(() => {
+                        longPressFired = true;
+                        baseState = state;
+                        zoomFrom = { ...GRID_VIEW };
+                        const tvw = cellW / ZOOM_LEVEL;
+                        const tvh = tvw * (H / W);
+                        zoomTarget = {
+                            x: clampAxis(cell.x + cellW / 2, tvw / 2, W),
+                            y: clampAxis(cell.y + cellH / 2, tvh / 2, H),
+                            vw: tvw,
+                        };
+                        state = "zoomin";
+                        frame = 0;
+                        vel.x = 0;
+                        vel.y = 0;
+                        startLoop();
+                    }, LONG_PRESS_MS);
+                });
+                canvas.addEventListener("pointermove", (e) => {
+                    if (drag) {
+                        const rect = canvas.getBoundingClientRect();
+                        const worldPerPx = cam.vw / rect.width;
+                        const dx = e.clientX - drag.x;
+                        const dy = e.clientY - drag.y;
+                        if (Math.hypot(dx, dy) > MOVE_TOLERANCE) drag.moved = true;
+                        const prevX = cam.x;
+                        const prevY = cam.y;
+                        cam.x = drag.camX - dx * worldPerPx;
+                        cam.y = drag.camY - dy * worldPerPx;
+                        clampCam();
+                        vel.x = (cam.x - prevX) * 0.6 + vel.x * 0.4;
+                        vel.y = (cam.y - prevY) * 0.6 + vel.y * 0.4;
+                        lastMoveT = performance.now();
+                        return;
+                    }
+                    if (!pressPos) return;
+                    if (Math.hypot(e.clientX - pressPos.x, e.clientY - pressPos.y) > MOVE_TOLERANCE) {
+                        cancelPress();
+                    }
+                });
+                canvas.addEventListener("pointerup", () => {
+                    cancelPress();
+                    endDrag();
+                });
+                canvas.addEventListener("pointercancel", () => {
+                    cancelPress();
+                    endDrag();
+                });
+                canvas.addEventListener("pointerleave", cancelPress);
+                canvas.addEventListener("contextmenu", (e) => {
+                    if (lastPointerType === "touch") e.preventDefault();
+                });
+                canvas.style.touchAction = "none";
+
+                canvas.addEventListener(
+                    "wheel",
+                    (e) => {
+                        if (state !== "zoomed") return;
+                        e.preventDefault();
+                        const rect = canvas.getBoundingClientRect();
+                        const worldPerPx = cam.vw / rect.width;
+                        cam.x += e.deltaX * worldPerPx;
+                        cam.y += e.deltaY * worldPerPx;
+                        clampCam();
+                    },
+                    { passive: false }
+                );
+
+                canvas.addEventListener("click", () => {
+                    if (suppressClick) {
+                        suppressClick = false;
+                        return;
+                    }
+                    if (longPressFired) {
+                        longPressFired = false;
+                        return;
+                    }
+                    if (state === "zoomed" || state === "zoomin") {
+                        zoomFrom = { ...cam };
+                        state = "zoomout";
+                        frame = 0;
+                        return;
+                    }
+                    if (state === "settled") {
+                        state = "out";
+                        frame = 0;
+                        startLoop();
+                    } else if (state === "out" || state === "pause" || state === "in" || state === "hold") {
+                        const rf =
+                            state === "out" ? TOTAL_FRAMES - frame :
+                                state === "pause" ? -1 :
+                                    state === "in" ? frame :
+                                        TOTAL_FRAMES;
+                        snapScales = picks.map((_, i) => scaleAtFrame(rf, i));
+                        state = "snap";
+                        frame = 0;
+                    } else if (state === "alive") {
+                        calmStartK = Math.min(floatFrame / RAMP_FRAMES, 1);
+                        state = "calm";
+                        frame = 0;
+                    }
+                });
+            });
+    </script>
+</body>
+
+</html>

@@ -9,12 +9,13 @@ Run with:  uv run convert_webp.py
 """
 
 import json
+import re
 from pathlib import Path
 
 from PIL import Image
 
-INPUT_DIR = Path("/Users/benstrauss/Downloads/final_windows_png")
-OUTPUT_DIR = Path("../final_windows_neighborhood")
+INPUT_DIR = Path("/Users/benstrauss/Downloads/windows_prints")
+OUTPUT_DIR = Path("../final_windows_prints")
 
 # --- WebP encode settings (tweak as needed) ---
 QUALITY = 100        # 0-100, lossy quality; higher = better and larger
@@ -24,12 +25,18 @@ OVERWRITE = False   # re-encode files already present in the output dir
 
 # Optional downscale: shrink each image so its SHORTER edge equals this many px,
 # preserving aspect ratio. Only downsizes (never upscales). Set to 0 to disable.
-RESIZE_MIN_EDGE = 400
+RESIZE_MIN_EDGE = 900
 
 # Optional rename via final_windows_map.json: save each output under its
 # new_shuffled_name, matched by the input filename (= daves_file_name). Set to
 # None to keep the original input filenames.
 MAP_PATH = Path(__file__).resolve().parent.parent / "final_windows_map.json"
+
+
+def normalize_stem(stem: str) -> str:
+    """Strip leading zeros from the trailing number, e.g. window-0893 -> window-893,
+    so input filenames match the (unpadded) daves_file_name keys in the map."""
+    return re.sub(r"\d+$", lambda m: str(int(m.group())), stem)
 
 
 def main() -> None:
@@ -54,8 +61,9 @@ def main() -> None:
     converted = skipped = failed = 0
 
     for i, src in enumerate(pngs, 1):
-        out_stem = rename.get(src.stem, src.stem)
-        if MAP_PATH and src.stem not in rename:
+        key = normalize_stem(src.stem)  # window-0893 -> window-893 to match the map
+        out_stem = rename.get(key, key)
+        if MAP_PATH and key not in rename:
             print(f"[{i}/{total}] WARN no map entry for {src.name}; keeping name")
         dst = OUTPUT_DIR / f"{out_stem}.webp"
         if dst.exists() and not OVERWRITE:
