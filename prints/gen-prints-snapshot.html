@@ -220,7 +220,7 @@
             ctx.textBaseline = "middle";
             const labelY = (borderY + ROWS * cellH + H) / 2;
             ctx.textAlign = "left";
-            ctx.fillText(`Block 0, ${printSizeLabel}, #${printNum}`, whiteB, labelY);
+            ctx.fillText(`BLOCK 0, ${printSizeLabel}, #${printNum}`, whiteB, labelY);
 
             const topLabelY = whiteB / 2;
             ctx.textAlign = "left";
@@ -236,7 +236,7 @@
                 ctx.font = `${seedFontPx}px ${LABEL_FONT}`;
             }
             ctx.textAlign = "right";
-            ctx.fillText(seed, W - whiteB, topLabelY);
+            ctx.fillText(`SEED: ${seed}`, W - whiteB, topLabelY);
             ctx.font = `${fontPx}px ${LABEL_FONT}`;
 
             // Windows, full size, row-major.
