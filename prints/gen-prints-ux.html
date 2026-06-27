@@ -31,6 +31,41 @@
             -webkit-tap-highlight-color: transparent;
         }
     </style>
+    <!--
+      Minimal $art: snapshot marker only (lifted from art.js).
+      This file does its own seeding/PRNG, so we pull in NOTHING else from
+      artjs — just the Cloudflare Browser Rendering snapshot hook:
+        $art.snapshot()    -> appends a hidden #art-snapshot-ready marker that
+                              the capture infra waits on (waitForSelector).
+        $art.captureMode   -> true only under the snapshot capture user agent
+                              (sentinel UA must match the infra config).
+      Loaded before the sketch so $art is ready when the render completes.
+    -->
+    <script>
+        window.$art = (function () {
+            const CAPTURE_UA = "tl-gen-art";
+            const captureMode =
+                typeof navigator !== "undefined" &&
+                new RegExp(CAPTURE_UA).test(navigator.userAgent || "");
+
+            // Idempotent: appends a hidden #art-snapshot-ready marker once the
+            // canvas is fully drawn. Optional freezeFn runs ONLY under the
+            // capture UA (live views never freeze). Call last.
+            function snapshot(onCapture) {
+                if (captureMode && typeof onCapture === "function") onCapture();
+                let el = document.getElementById("art-snapshot-ready");
+                if (!el) {
+                    el = document.createElement("div");
+                    el.id = "art-snapshot-ready";
+                    el.style.display = "none";
+                    (document.body || document.documentElement).appendChild(el);
+                }
+                return el;
+            }
+
+            return { snapshot, captureMode };
+        })();
+    </script>
 </head>
 
 <body>
@@ -46,7 +81,7 @@
         const PRINT_DPI = 300;
         const MIN_BORDER_IN = 0.75; // minimum outer border per side, inches
         const WIN_ASPECT = 1.25;    // window height / width (4:5 portrait)
-        const LABEL_HEIGHT_IN = 0.15; // bottom label LETTER height (real-world inches)
+        const LABEL_HEIGHT_IN = 0.14; // bottom label LETTER height (real-world inches)
 
         // Each preset is a target final physical print size, in inches (5:4).
         const PRESETS = [
@@ -123,19 +158,17 @@
         const PRINT_W = PRESET.finalWIn * PRINT_DPI; // full canvas, print px (exact target)
         const PRINT_H = PRESET.finalHIn * PRINT_DPI;
 
-        const LIVE_MAX_H = 4000;
-
-        // Live preview may downscale the whole canvas (grid + border) uniformly;
-        // print/export keeps native resolution. Geometry stays float so the 5:4
-        // ratio is exact; only the integer canvas pixel dims are rounded.
-        const hasMouse = !!(window.matchMedia && window.matchMedia("(any-pointer: fine)").matches);
-        // Full native resolution on desktop or in capture mode; cap height on
-        // pure-touch devices for live-preview performance only.
-        const liveScale = (hasMouse || captureMode) ? 1 : Math.min(1, LIVE_MAX_H / PRINT_H);
+        // Always render the canvas backing store at full native print
+        // resolution (no downscale cap). The CSS (max-width/height: 100vw/vh)
+        // scales the DISPLAY to fit the viewport; the backing store stays full
+        // size so the canvas is as big as it needs to be. Geometry stays float
+        // so the 5:4 ratio is exact; only the integer canvas pixel dims rounded.
+        const liveScale = 1;
         const cellW = CELL_W * liveScale;
         const cellH = CELL_H * liveScale;
         const borderX = BORDER_X * liveScale;
         const borderY = BORDER_Y * liveScale;
+        const whiteB = MIN_BORDER_IN * PRINT_DPI * liveScale; // uniform visible white frame, all sides
         const W = COLS * cellW + 2 * borderX;
         const H = ROWS * cellH + 2 * borderY;
 
@@ -259,13 +292,15 @@
                     startFrame[cell] = count > 1 ? Math.round((order / (count - 1)) * span) : 0;
                 });
 
-                // Paint the backdrop: white outer border, black behind the window
-                // grid (so popping/empty cells read against black, border stays white).
+                // Paint the backdrop: uniform 0.75" white frame on all sides,
+                // black field inside it. The grid is height-limited so it leaves
+                // horizontal slack; the black field fills that slack (grid stays
+                // centered) so popping/empty cells read against black.
                 function paintBg() {
                     ctx.fillStyle = "#fff";
                     ctx.fillRect(0, 0, W, H);
                     ctx.fillStyle = "#000";
-                    ctx.fillRect(borderX, borderY, COLS * cellW, ROWS * cellH);
+                    ctx.fillRect(whiteB, whiteB, W - 2 * whiteB, H - 2 * whiteB);
                     drawLabels();
                 }
 
@@ -288,7 +323,10 @@
                     ctx.font = `${fontPx}px ${LABEL_FONT}`;
                     ctx.textBaseline = "middle";
                     ctx.textAlign = "left";
-                    ctx.fillText(text, borderX, cy);
+                    ctx.fillText(text, whiteB, cy);
+                    // Centered title in the bottom margin.
+                    ctx.textAlign = "center";
+                    ctx.fillText("WINDOWS // NYC", W / 2, cy);
                 }
 
                 function render(frame) {
@@ -328,6 +366,7 @@
                     if (frame >= TOTAL_FRAMES) {
                         state = "settled";
                         running = false; // idle on the finished grid
+                        $art.snapshot(); // signal the snapshot infra: render complete
                         return;
                     }
                     frame++;
@@ -360,6 +399,7 @@
                     render(TOTAL_FRAMES);
                     window.__renderReady = true;
                     document.body.setAttribute("data-render-ready", "1");
+                    $art.snapshot(); // signal the snapshot infra: render complete
                 } else {
                     startLoop();
                 }

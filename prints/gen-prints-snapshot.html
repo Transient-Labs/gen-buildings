@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Buildings Prints</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            height: 100%;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        canvas {
+            display: block;
+            max-width: 100vw;
+            max-height: 100vh;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+    <!--
+      Minimal $art: snapshot marker only (lifted from art.js).
+      This file does its own seeding/PRNG, so we pull in NOTHING else from
+      artjs — just the Cloudflare Browser Rendering snapshot hook:
+        $art.snapshot()    -> appends a hidden #art-snapshot-ready marker that
+                              the capture infra waits on (waitForSelector).
+        $art.captureMode   -> true only under the snapshot capture user agent
+                              (sentinel UA must match the infra config).
+      Loaded before the sketch so $art is ready when the render completes.
+    -->
+    <script>
+        window.$art = (function () {
+            const CAPTURE_UA = "tl-gen-art";
+            const captureMode =
+                typeof navigator !== "undefined" &&
+                new RegExp(CAPTURE_UA).test(navigator.userAgent || "");
+
+            // Idempotent: appends a hidden #art-snapshot-ready marker once the
+            // canvas is fully drawn. Optional freezeFn runs ONLY under the
+            // capture UA (live views never freeze). Call last.
+            function snapshot(onCapture) {
+                if (captureMode && typeof onCapture === "function") onCapture();
+                let el = document.getElementById("art-snapshot-ready");
+                if (!el) {
+                    el = document.createElement("div");
+                    el.id = "art-snapshot-ready";
+                    el.style.display = "none";
+                    (document.body || document.documentElement).appendChild(el);
+                }
+                return el;
+            }
+
+            return { snapshot, captureMode };
+        })();
+    </script>
+</head>
+
+<body>
+    <script>
+        const WINDOW_COUNT = 1000;
+
+        // ---- print-ready grid presets ----
+        // Each preset targets an EXACT final physical print size (5:4). Windows
+        // keep their 4:5 aspect (cellH = 1.25 * cellW) and butt edge-to-edge with
+        // no gaps; only an outer border separates the grid from the paper edge.
+        // The window size flexes per preset so the largest grid fits inside the
+        // target while every side keeps at least MIN_BORDER_IN.
+        const PRINT_DPI = 300;
+        const MIN_BORDER_IN = 0.75; // minimum outer border per side, inches
+        const WIN_ASPECT = 1.25;    // window height / width (4:5 portrait)
+        const LABEL_HEIGHT_IN = 0.14; // bottom label LETTER height (real-world inches)
+        const LABEL_FONT = '"Courier New", monospace'; // web-safe monospace
+
+        // Each preset is a target final physical print size, in inches (5:4).
+        const PRESETS = [
+            { cols: 11, rows: 7, finalWIn: 10, finalHIn: 8 },
+            { cols: 11, rows: 7, finalWIn: 20, finalHIn: 16 },
+            { cols: 11, rows: 7, finalWIn: 30, finalHIn: 24 },
+        ];
+
+        // Derive the in-inch geometry for a preset: the largest cell (keeping 4:5)
+        // that fits the available area after reserving MIN_BORDER_IN on all sides,
+        // then the actual (>= min) borders that center the grid in the target.
+        function presetGeom(p) {
+            const availableWIn = p.finalWIn - 2 * MIN_BORDER_IN;
+            const availableHIn = p.finalHIn - 2 * MIN_BORDER_IN;
+            const cellWIn = Math.min(availableWIn / p.cols, (availableHIn / p.rows) / WIN_ASPECT);
+            const cellHIn = cellWIn * WIN_ASPECT;
+            const borderXIn = (p.finalWIn - p.cols * cellWIn) / 2;
+            const borderYIn = (p.finalHIn - p.rows * cellHIn) / 2;
+            return { cellWIn, cellHIn, borderXIn, borderYIn };
+        }
+
+        // ---- params: size, print number ----
+        // ?size=0|1|2 (10x8 | 20x16 | 30x24) drives the render AND the caption. Default 0.
+        const sizeParam = parseInt(new URLSearchParams(location.search).get("size"), 10);
+        const sizeIdx = Number.isFinite(sizeParam) ? Math.min(Math.max(sizeParam, 0), PRESETS.length - 1) : 0;
+        const PRESET = PRESETS[sizeIdx];
+
+        // ?print=1 -> "#1" in the bottom margin (defaults to 1).
+        const printParam = new URLSearchParams(location.search).get("print");
+        const printNum = printParam != null ? printParam : "1";
+
+        // Bottom caption size label (height×width), e.g. size=0 -> 8"x10".
+        const printSizeLabel = `${PRESET.finalHIn}"x${PRESET.finalWIn}"`;
+
+        const COLS = PRESET.cols;
+        const ROWS = PRESET.rows;
+        const cells = COLS * ROWS;
+
+        // ---- native print-resolution geometry (inches × DPI) ----
+        const GEOM = presetGeom(PRESET);
+        const cellW = GEOM.cellWIn * PRINT_DPI;
+        const cellH = GEOM.cellHIn * PRINT_DPI;
+        const borderX = GEOM.borderXIn * PRINT_DPI;
+        const borderY = GEOM.borderYIn * PRINT_DPI;
+        const whiteB = MIN_BORDER_IN * PRINT_DPI; // uniform visible white frame, all sides
+        const W = COLS * cellW + 2 * borderX;
+        const H = ROWS * cellH + 2 * borderY;
+
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.round(W);
+        canvas.height = Math.round(H);
+        document.body.appendChild(canvas);
+        const ctx = canvas.getContext("2d");
+
+        // Load the given path and fully decode it (kept as an ImageBitmap so the
+        // draw doesn't stall re-rasterizing at full size).
+        function loadImage(src) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = () => resolve(img);
+                img.onerror = () => reject(new Error("failed to load " + src));
+                img.src = src;
+            }).then((img) =>
+                img
+                    .decode()
+                    .then(() => (window.createImageBitmap ? createImageBitmap(img) : img))
+                    .catch(() => img)
+            );
+        }
+
+        // ---- seeded PRNG for window selection ----
+        // Pass ?seed=<any string> to make the window selection reproducible: the
+        // same seed always picks the same windows. With no seed, a random one is
+        // generated so each load differs. cyrb128 hashes the string into 4
+        // 32-bit values; mulberry32 turns one into a [0,1) stream.
+        function cyrb128(str) {
+            let h1 = 1779033703, h2 = 3144134277, h3 = 1013904242, h4 = 2773480762;
+            for (let i = 0; i < str.length; i++) {
+                const k = str.charCodeAt(i);
+                h1 = h2 ^ Math.imul(h1 ^ k, 597399067);
+                h2 = h3 ^ Math.imul(h2 ^ k, 2869860233);
+                h3 = h4 ^ Math.imul(h3 ^ k, 951274213);
+                h4 = h1 ^ Math.imul(h4 ^ k, 2716044179);
+            }
+            h1 = Math.imul(h3 ^ (h1 >>> 18), 597399067);
+            h2 = Math.imul(h4 ^ (h2 >>> 22), 2869860233);
+            h3 = Math.imul(h1 ^ (h3 >>> 17), 951274213);
+            h4 = Math.imul(h2 ^ (h4 >>> 19), 2716044179);
+            return (h1 ^ h2 ^ h3 ^ h4) >>> 0;
+        }
+        function mulberry32(a) {
+            return function () {
+                a |= 0; a = (a + 0x6D2B79F5) | 0;
+                let t = Math.imul(a ^ (a >>> 15), 1 | a);
+                t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+                return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+            };
+        }
+
+        const seedParam = new URLSearchParams(location.search).get("seed");
+        const seed = seedParam != null ? seedParam : String(Math.floor(Math.random() * 1e9));
+        const rng = mulberry32(cyrb128(seed));
+
+        // Randomly select `cells` unique window ids (no repeats) from 1..WINDOW_COUNT.
+        const picks = [];
+        const seen = new Set();
+        while (picks.length < cells) {
+            const n = 1 + Math.floor(rng() * WINDOW_COUNT);
+            if (seen.has(n)) continue;
+            seen.add(n);
+            picks.push(n);
+        }
+
+        // ---- render: load every window, draw the grid, signal the snapshot ----
+        Promise.all(picks.map((n) => loadImage(`https://cdn.transientlabs.xyz/tlx/windows/building-prints/final_windows_prints/window-${n}.webp`))).then((images) => {
+            // Backdrop: uniform 0.75" white frame on all sides, black field
+            // inside it. The grid is height-limited so it leaves horizontal
+            // slack; the black field fills that slack (grid stays centered).
+            ctx.fillStyle = "#fff";
+            ctx.fillRect(0, 0, W, H);
+            ctx.fillStyle = "#000";
+            ctx.fillRect(whiteB, whiteB, W - 2 * whiteB, H - 2 * whiteB);
+
+            // Bottom-left caption "Block 0, <size>, #<print>", left-aligned to the
+            // grid's left edge and vertically centered in the bottom border. The
+            // font em != glyph height, so measure a cap-height sample ("0") and
+            // rescale the em so drawn letters hit the target LETTER height.
+            const targetPx = LABEL_HEIGHT_IN * PRINT_DPI;
+            ctx.font = `${targetPx}px ${LABEL_FONT}`;
+            const m = ctx.measureText("0");
+            const capH = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent;
+            const fontPx = capH > 0 ? targetPx * (targetPx / capH) : targetPx;
+            ctx.fillStyle = "#000";
+            ctx.font = `${fontPx}px ${LABEL_FONT}`;
+            ctx.textBaseline = "middle";
+            const labelY = (borderY + ROWS * cellH + H) / 2;
+            ctx.textAlign = "left";
+            ctx.fillText(`Block 0, ${printSizeLabel}, #${printNum}`, whiteB, labelY);
+            // Centered title in the bottom margin.
+            ctx.textAlign = "center";
+            ctx.fillText("WINDOWS // NYC", W / 2, labelY);
+
+            // Windows, full size, row-major.
+            for (let gy = 0; gy < ROWS; gy++) {
+                for (let gx = 0; gx < COLS; gx++) {
+                    const i = gy * COLS + gx;
+                    ctx.drawImage(images[i], borderX + gx * cellW, borderY + gy * cellH, cellW, cellH);
+                }
+            }
+
+            // Hold the finished frame for 1s before signaling, so the capture
+            // grabs a fully settled grid.
+            setTimeout(() => $art.snapshot(), 1000);
+        });
+    </script>
+</body>
+
+</html>
