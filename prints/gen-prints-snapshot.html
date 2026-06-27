@@ -221,9 +221,23 @@
             const labelY = (borderY + ROWS * cellH + H) / 2;
             ctx.textAlign = "left";
             ctx.fillText(`Block 0, ${printSizeLabel}, #${printNum}`, whiteB, labelY);
-            // Centered title in the bottom margin.
-            ctx.textAlign = "center";
-            ctx.fillText("WINDOWS // NYC", W / 2, labelY);
+
+            const topLabelY = whiteB / 2;
+            ctx.textAlign = "left";
+            ctx.fillText("WINDOWS // NYC", whiteB, topLabelY);
+
+            // Seed, right-aligned in the top margin.
+            const seedMaxW = W - 2 * whiteB;
+            let seedFontPx = fontPx;
+            ctx.font = `${seedFontPx}px ${LABEL_FONT}`;
+            const seedW = ctx.measureText(seed).width;
+            if (seedW > seedMaxW) {
+                seedFontPx *= seedMaxW / seedW;
+                ctx.font = `${seedFontPx}px ${LABEL_FONT}`;
+            }
+            ctx.textAlign = "right";
+            ctx.fillText(seed, W - whiteB, topLabelY);
+            ctx.font = `${fontPx}px ${LABEL_FONT}`;
 
             // Windows, full size, row-major.
             for (let gy = 0; gy < ROWS; gy++) {
