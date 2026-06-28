@@ -89,6 +89,7 @@
             { cols: 11, rows: 7, finalWIn: 10, finalHIn: 8 },
             { cols: 11, rows: 7, finalWIn: 20, finalHIn: 16 },
             { cols: 11, rows: 7, finalWIn: 30, finalHIn: 24 },
+            { cols: 11, rows: 7, finalWIn: 50, finalHIn: 40 },
         ];
 
         // Derive the in-inch geometry for a preset: the largest cell (keeping 4:5)
@@ -105,7 +106,7 @@
         }
 
         // ---- params: size, print number ----
-        // ?size=0|1|2 (10x8 | 20x16 | 30x24) drives the render AND the caption. Default 0.
+        // ?size=0|1|2|3 (10x8 | 20x16 | 30x24 | 50x40) drives the render AND the caption. Default 0.
         const sizeParam = parseInt(new URLSearchParams(location.search).get("size"), 10);
         const sizeIdx = Number.isFinite(sizeParam) ? Math.min(Math.max(sizeParam, 0), PRESETS.length - 1) : 0;
         const PRESET = PRESETS[sizeIdx];
