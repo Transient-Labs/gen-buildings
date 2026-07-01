@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Buildings Print</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            height: 100%;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            /* Stop long-press from selecting the canvas/iframe on mobile */
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        canvas {
+            display: block;
+            max-width: 100vw;
+            max-height: 100vh;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+    <!--
+      Collector print (seeded). This is the print-ready sibling of index.html:
+      it re-runs the SAME $art-seeded window selection so a token's print shows
+      the exact same windows as the live token, then renders them once as a
+      static 16"x20" print (0.75" white border, black padding, labels) instead
+      of the animated grid.
+
+      art.js is INLINED below verbatim (rather than <script src>) so this file
+      is path-independent wherever the print service serves it. Load order is
+      still determinism-critical: $art must exist and be seeded before the
+      sketch runs, which the inline IIFE guarantees (it seeds synchronously at
+      parse time, exactly like the external file did).
+    -->
+    <script>
+        /**
+         * Generative art random helpers with p5-style configurable seeding.
+         *
+         * Reads mint params from the URL: tokenId, blockhash, txHash, minter
+         * (each falls back to a random value so the script runs locally).
+         *
+         * tokenId + blockhash are ALWAYS part of the seed (uniqueness +
+         * unpredictability). minter, txHash, gasPrice, and gasUsed are opt-in.
+         * Re-seeding resets the random stream deterministically, like p5's randomSeed().
+         *
+         *   $art.seedFrom();                       // tokenId + blockhash (default)
+         *   $art.seedFrom("minter");               // + minter
+         *   $art.seedFrom("gasPrice", "gasUsed");  // + gas fields
+         *
+         * A `seed` URL param is a curated, full override: when present it becomes the
+         * complete seed verbatim and seedFrom(...) defers to it (contract-injected for
+         * collector-curated drops). Absent locally, seeding composes from the fields.
+         *
+         * Snapshot + traits (for Cloudflare Browser Rendering):
+         *   $art.setTraits({ Palette: "Sunset", Layers: 5 }); // hidden #art-traits JSON
+         *   $art.snapshot();                                  // hidden #art-snapshot-ready marker
+         *   $art.snapshot(() => noLoop());                    // + freeze the frame under capture
+         *
+         * For animated pieces, pass snapshot() a freeze callback. It runs ONLY under the
+         * snapshot capture user agent (live collector views never freeze), letting the
+         * screenshot grab the frame that was live at call time. Making that frame
+         * reproducible is the artist's job: call snapshot() at a deterministic point.
+         */
+        const $art = (function () {
+            const params = new URLSearchParams(window.location.search);
+            const get = (key, fb) => {
+                const v = params.get(key);
+                return v === null || v === "" ? fb : v;
+            };
+            const randHex = (len) =>
+                "0x" + Array.from({ length: len }, () => "0123456789abcdef"[(Math.random() * 16) | 0]).join("");
+
+            // Raw mint values (with local-dev fallbacks). "0" tokenId is preserved.
+            const mint = {
+                tokenId:   get("tokenId", Math.floor(Math.random() * 10000).toString()),
+                blockhash: get("blockhash", randHex(64)),
+                txHash:    get("txHash", randHex(64)),
+                minter:    get("minter", randHex(40)),
+                gasPrice:  get("gasPrice", Math.floor(Math.random() * 1e11).toString()),       // ~wei
+                gasUsed:   get("gasUsed", (21000 + Math.floor(Math.random() * 1e6)).toString()),
+                seed:      get("seed", null), // curated full-seed override; null = compose from fields
+            };
+
+            // ---- seed -> PRNG ----
+            function xmur3(str) {
+                let h = 1779033703 ^ str.length;
+                for (let i = 0; i < str.length; i++) {
+                    h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
+                    h = (h << 13) | (h >>> 19);
+                }
+                return function () {
+                    h = Math.imul(h ^ (h >>> 16), 2246822507);
+                    h = Math.imul(h ^ (h >>> 13), 3266489909);
+                    return (h ^= h >>> 16) >>> 0;
+                };
+            }
+            function sfc32(a, b, c, d) {
+                return function () {
+                    a |= 0; b |= 0; c |= 0; d |= 0;
+                    const t = (((a + b) | 0) + d) | 0;
+                    d = (d + 1) | 0;
+                    a = b ^ (b >>> 9);
+                    b = (c + (c << 3)) | 0;
+                    c = (c << 21) | (c >>> 11);
+                    c = (c + t) | 0;
+                    return (t >>> 0) / 4294967296; // [0, 1)
+                };
+            }
+
+            // ---- seed composition ----
+            const FIELD_TAGS = {
+                tokenId: "tid", blockhash: "blk", txHash: "tx", minter: "min",
+                gasPrice: "gp", gasUsed: "gu",
+            };
+            const REQUIRED = ["tokenId", "blockhash"];
+
+            function composeSeed(extraFields) {
+                // required fields first, then opt-ins; de-duplicated, order preserved
+                const ordered = [...new Set([...REQUIRED, ...extraFields])];
+                return ordered
+                    .map((f) => {
+                        if (!(f in FIELD_TAGS)) throw new Error("$art: unknown seed field '" + f + "'");
+                        return FIELD_TAGS[f] + ":" + String(mint[f]).toLowerCase();
+                    })
+                    .join("|");
+            }
+
+            // Mutable generator so re-seeding resets the stream (p5 semantics).
+            let rand;
+            let currentSeed;
+
+            function applySeed(seedString) {
+                currentSeed = seedString;
+                const next = xmur3(seedString);
+                rand = sfc32(next(), next(), next(), next());
+                for (let i = 0; i < 15; i++) rand(); // warm-up
+            }
+
+            // ---- p5-style seeding ----
+
+            // Curated full-seed override from the `seed` URL param (null when absent).
+            const seedOverride = mint.seed;
+
+            // Seed from chosen mint fields (tokenId + blockhash always included).
+            // If a `seed` URL param is present it is the complete seed verbatim and
+            // wins over the field composition (curated drops). Resets the random stream.
+            // Returns the seed string used.
+            function seedFrom(...extraFields) {
+                const composed = composeSeed(extraFields); // validates fields, may throw
+                applySeed(seedOverride !== null ? seedOverride : composed);
+                return currentSeed;
+            }
+
+            // Default seed on load: the two required fields.
+            seedFrom();
+
+            // ---- random helpers (draw from the current stream) ----
+
+            // random() -> [0,1) | random(max) -> [0,max) | random(min,max) -> [min,max)
+            function random(...args) {
+                let min = 0, max = 1;
+                if (args.length === 1) max = args[0];
+                else if (args.length >= 2) { min = args[0]; max = args[1]; }
+                return min + (max - min) * rand();
+            }
+
+            // Inclusive of both ends. randomInt(max) -> [0,max] | randomInt(min,max) -> [min,max]
+            function randomInt(...args) {
+                let min = 0, max = 1;
+                if (args.length === 1) max = args[0];
+                else if (args.length >= 2) { min = args[0]; max = args[1]; }
+                return Math.floor(random(min, max + 1));
+            }
+
+            function randomBool(p = 0.5) {
+                return random() < p;
+            }
+
+            function randomElement(array) {
+                if (!array || array.length === 0) return undefined;
+                return array[randomInt(0, array.length - 1)];
+            }
+
+            // ---- snapshot + traits (hidden DOM, survives in the HTML snapshot) ----
+
+            // Write a hidden, non-rendered JSON element (idempotent by id).
+            function writeHiddenJSON(id, data) {
+                let el = document.getElementById(id);
+                if (!el) {
+                    el = document.createElement("script");
+                    el.type = "application/json"; // not executed, not rendered, survives in HTML
+                    el.id = id;
+                    (document.body || document.documentElement).appendChild(el);
+                }
+                el.textContent = JSON.stringify(data);
+                return el;
+            }
+
+            let currentTraits = null;
+
+            // { Palette: "Sunset", Layers: 5 } -> OpenSea [{trait_type, value}, ...]
+            // Emitted into a hidden #art-traits element for the snapshot HTML.
+            function setTraits(traits) {
+                if (!traits || typeof traits !== "object" || Array.isArray(traits))
+                    throw new Error("$art.setTraits: expects a plain object of { name: value }");
+                currentTraits = Object.keys(traits).map((k) => ({ trait_type: k, value: traits[k] }));
+                writeHiddenJSON("art-traits", currentTraits);
+                return currentTraits;
+            }
+
+            // Capture environment detection. Cloudflare Browser Rendering is configured to
+            // send this sentinel user agent; live collector views never match. Keep in sync
+            // with the snapshot infra's userAgent setting.
+            const CAPTURE_UA = "tl-gen-art";
+            const captureMode =
+                typeof navigator !== "undefined" &&
+                new RegExp(CAPTURE_UA).test(navigator.userAgent || "");
+
+            // Signal that the canvas is fully drawn: append a hidden marker so Cloudflare's
+            // Browser Rendering API can waitForSelector("#art-snapshot-ready"). Idempotent.
+            //
+            // For animated pieces, pass a freeze callback (e.g. () => noLoop(), or one that
+            // cancels your rAF loop). It runs ONLY under the capture user agent, so the
+            // screenshot captures the frame live at call time while collectors keep their
+            // animation. Reproducibility of that frame is the artist's responsibility.
+            function snapshot(onCapture) {
+                if (captureMode && typeof onCapture === "function") onCapture();
+                let el = document.getElementById("art-snapshot-ready");
+                if (!el) {
+                    el = document.createElement("div");
+                    el.id = "art-snapshot-ready";
+                    el.style.display = "none";
+                    (document.body || document.documentElement).appendChild(el);
+                }
+                return el;
+            }
+
+            return {
+                mint,
+                seedFrom,
+                getSeed: () => currentSeed,
+                random,
+                randomInt,
+                randomBool,
+                randomElement,
+                setTraits,
+                getTraits: () => currentTraits,
+                snapshot,
+                captureMode,
+            };
+        })();
+
+        window.$art = $art;
+    </script>
+</head>
+
+<body>
+    <script>
+        const WINDOW_COUNT = 1000; // window-1 ... window-1000
+
+        // Data + images live on the CDN so this print file is path-independent.
+        const CDN_BASE = "https://cdn.transientlabs.xyz/tlx/windows/building-prints/";
+        const IMG_BASE = CDN_BASE + "final_windows_prints/"; // print-res window tiles
+
+        // ---- seeded selection (MUST match index.html draw-for-draw) ----
+        // The whole point of this file is that a token's print shows the exact
+        // same windows as the live token. That only holds if the $art draws here
+        // run in the identical ORDER and COUNT as index.html up to `picks`. So the
+        // grid pick + special-building selection below is copied verbatim from
+        // index.html; anything AFTER picks there (reveal order, sway floats) is
+        // omitted because it doesn't affect which windows are chosen.
+
+        // Grid size distribution (weights sum to 100) — bell curve around 6x6.
+        const GRID_SIZES = [
+            { n: 3, weight: 20 },
+            { n: 4, weight: 20 },
+            { n: 6, weight: 20 },
+            { n: 8, weight: 20 },
+            { n: 12, weight: 20 },
+        ];
+
+        console.log("$art seed:", $art.getSeed());
+
+        function weightedPick(options) {
+            let r = $art.random(100);
+            for (const opt of options) {
+                r -= opt.weight;
+                if (r < 0) return opt;
+            }
+            return options[options.length - 1];
+        }
+
+        // FIRST $art draw — same as index.html so the grid size matches the token.
+        const GRID = weightedPick(GRID_SIZES).n;
+
+        // ---- print geometry: exact 16"x20" (4:5 portrait) ----
+        // The grid is GRID x GRID of 4:5 tiles, so its overall aspect is always
+        // 4:5 — same as the paper. After reserving a uniform 0.75" white frame the
+        // grid is width-limited, so it centers in the black interior with a little
+        // black padding top/bottom filling the vertical slack (keeps the white
+        // border a perfect, uniform 0.75" on every side).
+        const PRINT_DPI = 300;
+        const MIN_BORDER_IN = 0.75;                     // uniform white frame, all sides
+        const WIN_ASPECT = 1.25;                        // window height / width (4:5)
+        const LABEL_HEIGHT_IN = 0.14;                   // caption LETTER height, inches
+        const LABEL_FONT = '"Courier New", monospace';  // web-safe monospace
+        const FINAL_W_IN = 16;                          // print width (inches)
+        const FINAL_H_IN = 20;                          // print height (inches)
+
+        const COLS = GRID, ROWS = GRID;
+        const availableWIn = FINAL_W_IN - 2 * MIN_BORDER_IN;
+        const availableHIn = FINAL_H_IN - 2 * MIN_BORDER_IN;
+        const cellWIn = Math.min(availableWIn / COLS, (availableHIn / ROWS) / WIN_ASPECT);
+        const cellHIn = cellWIn * WIN_ASPECT;
+        const borderXIn = (FINAL_W_IN - COLS * cellWIn) / 2;
+        const borderYIn = (FINAL_H_IN - ROWS * cellHIn) / 2;
+
+        const cellW = cellWIn * PRINT_DPI;
+        const cellH = cellHIn * PRINT_DPI;
+        const borderX = borderXIn * PRINT_DPI;
+        const borderY = borderYIn * PRINT_DPI;
+        const whiteB = MIN_BORDER_IN * PRINT_DPI;       // visible white frame, all sides
+        const W = COLS * cellW + 2 * borderX;           // == FINAL_W_IN * PRINT_DPI
+        const H = ROWS * cellH + 2 * borderY;           // == FINAL_H_IN * PRINT_DPI
+
+        // ---- labels (from query params) ----
+        // tokenId + blockhash come from $art.mint (parsed by the inlined art.js and
+        // part of the seed). print is a plain caption param (default 1).
+        const printParam = new URLSearchParams(location.search).get("print");
+        const printNum = printParam != null && printParam !== "" ? printParam : "1";
+        const buildingNum = $art.mint.tokenId;
+        const blockhash = $art.mint.blockhash;
+
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.round(W);
+        canvas.height = Math.round(H);
+        document.body.appendChild(canvas);
+        const ctx = canvas.getContext("2d");
+
+        function loadImage(src) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = () => resolve(img);
+                img.onerror = () => reject(new Error("failed to load " + src));
+                img.src = src;
+            }).then((img) =>
+                // Fully decode now and keep the decoded pixels as an ImageBitmap so
+                // the full-size draw doesn't stall re-rasterizing.
+                img
+                    .decode()
+                    .then(() => (window.createImageBitmap ? createImageBitmap(img) : img))
+                    .catch(() => img)
+            );
+        }
+
+        // Special-building table + per-window keyed data from the CDN. On any
+        // failure each falls back to {} so the print still renders (special falls
+        // through to a normal build) — mirrors index.html's resilience. ALL seeded
+        // draws happen inside this .then in a fixed order, after GRID.
+        Promise.all([
+            fetch(CDN_BASE + "special_building_counts.json").then((r) => r.json()).catch(() => ({})),
+            fetch(CDN_BASE + "windows_keyed.json").then((r) => r.json()).catch(() => ({})),
+        ]).then(([SPECIAL, KEYED]) => {
+            const cells = GRID * GRID;
+
+            // Per-color window-id pools from the keyed data (deterministic; no $art
+            // draws). Used by the structured "Rainbow" special building.
+            const colorPools = {}; // color -> [window ids]
+            for (const key in KEYED) {
+                const c = KEYED[key].color;
+                if (!c) continue;
+                (colorPools[c] || (colorPools[c] = [])).push(Number(key.split("-")[1]));
+            }
+            const RAINBOW = (SPECIAL.Rainbow && SPECIAL.Rainbow.colors) || null;
+
+            // Rainbow is structured (not a flat pool): restricted to 6x6 / 8x8,
+            // where the colors cycle per-row (each row is one color). The grid<=4
+            // per-window branch below is retained but currently unreachable.
+            function rainbowReq(grid) {
+                const need = {};
+                for (const c of RAINBOW) need[c] = 0;
+                if (grid <= 4) {
+                    for (let i = 0; i < grid * grid; i++) need[RAINBOW[i % RAINBOW.length]]++;
+                } else {
+                    for (let r = 0; r < grid; r++) need[RAINBOW[r % RAINBOW.length]] += grid;
+                }
+                return need;
+            }
+            function rainbowQualifies(grid) {
+                if (!RAINBOW) return false;
+                if (grid !== 6 && grid !== 8) return false; // rainbow only on 6x6 / 8x8
+                const need = rainbowReq(grid); // each color must have enough unique windows
+                return RAINBOW.every((c) => (colorPools[c] || []).length >= need[c]);
+            }
+            // Seeded: pick each color's quota of unique windows (partial
+            // Fisher-Yates, fixed color order), then lay them out by cell/row.
+            function buildRainbow(grid) {
+                const need = rainbowReq(grid);
+                const bag = {};
+                for (const c of RAINBOW) {
+                    const p = (colorPools[c] || []).slice();
+                    for (let i = 0; i < need[c]; i++) {
+                        const j = i + $art.randomInt(0, p.length - 1 - i);
+                        [p[i], p[j]] = [p[j], p[i]];
+                    }
+                    bag[c] = { list: p, idx: 0 };
+                }
+                const out = new Array(grid * grid);
+                if (grid <= 4) {
+                    for (let i = 0; i < grid * grid; i++) {
+                        const c = RAINBOW[i % RAINBOW.length];
+                        out[i] = bag[c].list[bag[c].idx++];
+                    }
+                } else {
+                    for (let r = 0; r < grid; r++) {
+                        const c = RAINBOW[r % RAINBOW.length];
+                        for (let gx = 0; gx < grid; gx++) out[r * grid + gx] = bag[c].list[bag[c].idx++];
+                    }
+                }
+                return out;
+            }
+
+            // ~25% of builds are a "special building". Count-based specials draw
+            // `cells` windows from one flat pool; Rainbow uses its own builder.
+            const SPECIAL_PROB = 0.25;
+            let picks = null;
+
+            if ($art.randomBool(SPECIAL_PROB)) {
+                const qualified = Object.keys(SPECIAL).filter((n) =>
+                    SPECIAL[n].builder === "rainbow" ? rainbowQualifies(GRID) : SPECIAL[n].count >= cells
+                );
+                if (qualified.length) {
+                    const specialName = $art.randomElement(qualified); // equal chance among qualified
+                    if (SPECIAL[specialName].builder === "rainbow") {
+                        picks = buildRainbow(GRID);
+                    } else {
+                        const pool = SPECIAL[specialName].windows.slice();
+                        // partial Fisher-Yates: first `cells` entries become the picks
+                        for (let i = 0; i < cells; i++) {
+                            const j = i + $art.randomInt(0, pool.length - 1 - i);
+                            [pool[i], pool[j]] = [pool[j], pool[i]];
+                        }
+                        picks = pool.slice(0, cells);
+                    }
+                }
+            }
+
+            // Normal build (or special fell through): unique random window ids.
+            if (!picks) {
+                picks = [];
+                const seen = new Set();
+                while (picks.length < cells) {
+                    const n = $art.randomInt(1, WINDOW_COUNT);
+                    if (seen.has(n)) continue;
+                    seen.add(n);
+                    picks.push(n);
+                }
+            }
+
+            // ---- render: load every window, draw the print, signal the snapshot ----
+            Promise.all(picks.map((n) => loadImage(`${IMG_BASE}window-${n}.webp`))).then((images) => {
+                // Backdrop: uniform 0.75" white frame on all sides, black field
+                // inside it (fills the vertical slack around the centered grid).
+                ctx.fillStyle = "#fff";
+                ctx.fillRect(0, 0, W, H);
+                ctx.fillStyle = "#000";
+                ctx.fillRect(whiteB, whiteB, W - 2 * whiteB, H - 2 * whiteB);
+
+                // Windows, full size, row-major, centered in the interior.
+                for (let gy = 0; gy < ROWS; gy++) {
+                    for (let gx = 0; gx < COLS; gx++) {
+                        const i = gy * COLS + gx;
+                        ctx.drawImage(images[i], borderX + gx * cellW, borderY + gy * cellH, cellW, cellH);
+                    }
+                }
+
+                // Labels, drawn last in the white border bands. The font em != glyph
+                // height, so measure a cap-height sample ("0") and rescale the em so
+                // drawn letters hit the target LETTER height.
+                const targetPx = LABEL_HEIGHT_IN * PRINT_DPI;
+                ctx.font = `${targetPx}px ${LABEL_FONT}`;
+                const m = ctx.measureText("0");
+                const capH = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent;
+                const fontPx = capH > 0 ? targetPx * (targetPx / capH) : targetPx;
+                ctx.fillStyle = "#000";
+                ctx.font = `${fontPx}px ${LABEL_FONT}`;
+                ctx.textBaseline = "middle";
+
+                const leftX = whiteB;                 // aligned to the white frame's inner-left
+                const rightX = W - whiteB;            // aligned to the white frame's inner-right
+                const topY = whiteB / 2;              // vertically centered in the top white band
+                const bottomY = H - whiteB / 2;       // vertically centered in the bottom white band
+
+                ctx.textAlign = "left";
+                ctx.fillText("BUILDINGS // NYC", leftX, topY);
+                ctx.fillText(`BUILDING ${buildingNum}, PRINT ${printNum}`, leftX, bottomY);
+
+                ctx.textAlign = "right";
+                ctx.fillText(`BLOCKHASH: ${blockhash}`, rightX, topY);
+
+                console.log("BUILDING:", buildingNum, "| GRID:", `${GRID}x${GRID}`, "| PRINT:", printNum);
+
+                // Hold the finished frame for 1s before signaling, so the capture
+                // grabs a fully settled print.
+                setTimeout(() => $art.snapshot(), 1000);
+            });
+        });
+    </script>
+</body>
+
+</html>
